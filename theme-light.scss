@@ -1,0 +1,163 @@
+/*-- scss:defaults --*/
+
+// 색상 팔레트 — 학술서 느낌의 차분한 톤
+$primary: #1e3a5f;       // 진한 네이비 (헤더·강조)
+$secondary: #e74c3c;     // 포인트 레드 (경고·대비)
+$body-color: #222;
+$body-bg: #fdfdfb;       // 미세하게 따뜻한 흰색
+$link-color: #1e3a5f;
+$code-bg: #f4f4f0;
+$code-color: #b5390f;
+
+// 타이포그래피
+$font-family-serif: "Noto Serif KR", "Source Serif Pro", Georgia, serif;
+$font-family-sans-serif: "Noto Sans KR", -apple-system, "Apple SD Gothic Neo", sans-serif;
+$font-family-monospace: "JetBrains Mono", "Fira Code", Menlo, monospace;
+
+$headings-font-family: $font-family-sans-serif;
+$headings-font-weight: 600;
+
+/*-- scss:rules --*/
+
+// 본문 폭을 약간 좁혀 가독성 확보 (학술서 스타일)
+main.content {
+  max-width: 760px;
+  font-feature-settings: "kern", "liga";
+}
+
+// 챕터 제목
+h1.title {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.3em;
+  border-bottom: 3px solid $primary;
+  padding-bottom: 0.3em;
+}
+
+.subtitle {
+  color: lighten($primary, 20%);
+  font-weight: 400;
+  font-size: 1.2em;
+}
+
+h2 {
+  margin-top: 2.5em;
+  padding-top: 0.3em;
+  border-top: 1px solid #e8e8e0;
+  color: $primary;
+}
+
+h3 {
+  margin-top: 2em;
+  color: darken($primary, 5%);
+}
+
+// 수식 가독성
+.math.display {
+  font-size: 1.05em;
+  margin: 1.2em 0;
+}
+
+// 인용구
+blockquote {
+  border-left: 4px solid $primary;
+  background: #f7f7f2;
+  padding: 0.8em 1.2em;
+  font-style: normal;
+  color: #333;
+}
+
+// 테이블
+table {
+  font-size: 0.95em;
+  margin: 1.5em auto;
+}
+
+thead tr {
+  background: $primary !important;
+  color: white !important;
+}
+
+thead th {
+  color: white !important;
+  font-weight: 600;
+  border-bottom: none !important;
+}
+
+tbody tr:nth-child(even) {
+  background: #faf9f5;
+}
+
+// Callout 박스 — 교과서답게 차분하게
+.callout {
+  border-radius: 4px;
+  margin: 1.5em 0;
+}
+
+.callout-note {
+  border-left-color: $primary !important;
+}
+
+.callout-tip {
+  border-left-color: #2d7a4f !important;
+}
+
+.callout-warning {
+  border-left-color: #c77f1c !important;
+}
+
+.callout-important {
+  border-left-color: $secondary !important;
+}
+
+.callout-title {
+  font-weight: 600 !important;
+}
+
+// 코드 블록
+pre.sourceCode {
+  border-left: 3px solid $primary;
+  border-radius: 0;
+  background: #fafaf7;
+}
+
+code {
+  font-size: 0.9em;
+}
+
+// 사이드바
+.sidebar-navigation {
+  font-size: 0.92em;
+}
+
+.sidebar-item-text {
+  line-height: 1.4;
+}
+
+// 페이지 내비게이션
+.page-navigation {
+  margin-top: 3em;
+  border-top: 2px solid $primary;
+  padding-top: 1.5em;
+}
+
+// 장 번호 스타일
+.header-section-number {
+  color: lighten($primary, 25%);
+  font-weight: 400;
+}
+
+// 그림 캡션
+figcaption {
+  font-size: 0.92em;
+  color: #555;
+  text-align: center;
+  margin-top: 0.5em;
+  font-style: normal;
+}
+
+// 한글에 최적화된 줄바꿈
+p, li {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}

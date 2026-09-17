@@ -1,0 +1,248 @@
+/*-- scss:rules --*/
+
+/* ── Layout ── */
+.day-section {
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+/* ── Session Table ── */
+.session-table {
+  width: 100%;
+  border-collapse: collapse !important;
+  font-size: 0.92rem;
+  margin-bottom: 1.5rem;
+}
+.session-table thead tr th,
+.session-table th {
+  background-color: #2C5F8A !important;
+  color: #ffffff !important;
+  padding: 8px 12px !important;
+  text-align: left !important;
+  font-weight: 600 !important;
+  border-bottom: 2px solid #1a4a70 !important;
+}
+.session-table tbody td,
+.session-table td {
+  padding: 8px 12px !important;
+  border-bottom: 1px solid #e9ecef !important;
+  vertical-align: middle !important;
+  background-color: #ffffff !important;
+}
+.session-table tbody tr:hover td {
+  background-color: #f5f8fb !important;
+}
+
+/* Bootstrap 테이블 스타일 리셋 */
+.session-table.table,
+table.session-table {
+  --bs-table-bg: transparent;
+  --bs-table-striped-bg: transparent;
+  --bs-table-hover-bg: transparent;
+}
+
+.section-break {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid #e9ecef;
+}
+
+/* ── Time Column ── */
+.time-col {
+  vertical-align: middle !important;
+  text-align: center !important;
+  width: 110px;
+}
+.time-col .time-wrapper {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 4px;
+}
+.time-cell-flex {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* ── Table Text & List ── */
+.table-text {
+  font-size: 0.85rem !important;
+  line-height: 1.4 !important;
+  color: #495057 !important;
+  margin: 0 !important;
+}
+.table-text strong {
+  color: #212529 !important;
+}
+.table-list {
+  margin: 0 !important;
+  padding-left: 1.2rem !important;
+  list-style-type: disc !important;
+  line-height: 1.4 !important;
+  font-size: 0.85rem !important;
+  color: #495057 !important;
+}
+.table-list li {
+  margin-bottom: 4px !important;
+}
+.table-list li:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* ── Citation List ── */
+.cite-list {
+  margin: 0 !important;
+  padding-left: 1rem !important;
+  list-style-type: square !important;
+}
+.cite-list li {
+  font-size: 0.8rem !important;
+  line-height: 1.5 !important;
+  color: #6c757d !important;
+  margin-bottom: 6px !important;
+}
+.cite-list li:last-child {
+  margin-bottom: 0 !important;
+}
+.cite-author {
+  font-weight: 600;
+  color: #495057;
+}
+.cite-link {
+  color: #0d6efd !important;
+  text-decoration: none !important;
+  font-weight: 500;
+  margin-left: 2px;
+}
+.cite-link:hover {
+  text-decoration: underline !important;
+  color: #0a58ca !important;
+}
+
+/* ── Note Box ── */
+.note-box {
+  background: #f8f9fa;
+  border-left: 3px solid #adb5bd;
+  padding: 6px 12px;
+  font-size: 0.82rem;
+  color: #6c757d;
+  border-radius: 0 4px 4px 0;
+  margin-bottom: 1rem;
+}
+
+/* ── Flow Steps ── */
+.flow-steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  margin-top: 6px;
+  font-size: 0.78rem;
+}
+.flow-step {
+  background: #f1f3f5;
+  border: 1px solid #dee2e6;
+  padding: 2px 9px;
+  border-radius: 10px;
+  color: #495057;
+}
+.flow-arrow { color: #adb5bd; }
+
+/* ── Legend ── */
+.legend-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-top: 0.5rem;
+  font-size: 0.82rem;
+  color: #6c757d;
+  font-family: sans-serif;
+}
+
+/* ── Badges ── */
+body .badge,
+.book-body .badge {
+  display: inline-block !important;
+  padding: 0.35em 0.65em !important;
+  font-size: 0.75em !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  color: #fff !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+  vertical-align: baseline !important;
+  border-radius: 0.25rem !important;
+  margin-right: 3px !important;
+  margin-top: 3px !important;
+}
+body .badge-lec,
+.book-body .badge-lec      { background-color: #0288d1 !important; }
+body .badge-lab,
+.book-body .badge-lab      { background-color: #2e7d32 !important; }
+body .badge-discuss,
+.book-body .badge-discuss  { background-color: #ed6c02 !important; }
+body .badge-weight,
+.book-body .badge-weight   { background-color: #9c27b0 !important; }
+body .badge-design,
+.book-body .badge-design   { background-color: #009688 !important; }
+body .badge-workshop,
+.book-body .badge-workshop { background-color: #e91e63 !important; }
+body .badge-present,
+.book-body .badge-present  { background-color: #673ab7 !important; }
+body .badge-break,
+.book-body .badge-break    { background-color: #757575 !important; }
+body .badge-qa,
+.book-body .badge-qa       { background-color: #212121 !important; }
+body .badge-optional,
+.book-body .badge-optional {
+  background-color: #555555 !important;
+  font-size: 0.65rem !important;
+  padding: 0.25em 0.5em !important;
+  border-radius: 4px !important;
+  margin-top: 4px !important;
+}
+
+.badge-practice {
+  display: inline-block;
+  padding: 0.2em 0.6em;
+  margin-right: 0.4em;
+  border-radius: 0.35em;
+  background: #e8f5e9;
+  color: #2e7d32;
+  font-size: 0.75em;
+  font-weight: 600;
+  vertical-align: 0.08em;
+  white-space: nowrap;
+}
+
+.badge-practice::after {
+  content: " →";
+  font-size: 1em;
+  font-weight: 700;
+}
+
+/* ── Note Box ── */
+.note-box {
+  background: #f8f9fa;
+  border-left: 3px solid #adb5bd;
+  padding: 6px 12px;
+  font-size: 0.88rem !important;  /* !important 추가, 크기 살짝 키움 */
+  color: #6c757d;
+  border-radius: 0 4px 4px 0;
+  margin-bottom: 1rem;
+  line-height: 1.5 !important;   /* 추가 */
+}
+
+code, pre, code.sourceCode {
+  font-family: "JetBrains Mono", Menlo, monospace;
+  font-size: 0.88em;
+  font-feature-settings: "liga" 1, "calt" 1;
+}
+
+pre.sourceCode {
+  line-height: 1.6;
+}

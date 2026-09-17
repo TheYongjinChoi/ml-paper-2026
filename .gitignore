@@ -1,0 +1,26 @@
+# 배포용 결과물
+/docs/
+/.quarto/
+dashboard/index.html
+dashboard/index_files/
+dashboard/.quarto/
+
+# 원자료는 공유하지 않습니다. 결과는 렌더된 HTML로 전달됩니다.
+projects/*/data/*
+!projects/*/data/.gitkeep
+
+# Quarto 렌더 부산물
+projects/*/.quarto/
+projects/*/_master_cache/
+
+# R / RStudio
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+*.Rproj
+
+# 시스템 파일
+.DS_Store
+Thumbs.db
+~$*

@@ -1,0 +1,391 @@
+---
+title: "Code for \"Predicting Preterm Birth Using Machine Learning and Birth Certificate Records\""
+author: "Yongjin Choi (LSHTM, Yongjin.Choi@lshtm.ac.uk)"
+date: today
+format:
+  html:
+    embed-resources: true
+    toc: true
+    toc-depth: 3
+    code-fold: true
+    theme: paper
+execute:
+  echo: true
+  warning: false
+---
+
+::: {.callout-note collapse="true"}
+## How to run
+
+* Default (`quarto render _master.qmd`): re-reads the raw file and loads the
+  most recent results CSVs in `outputs/`. No model training.
+* Retrain: `quarto render _master.qmd -P RUN_MODELS:true -P SAMPLE:3`
+:::
+
+```{python}
+#| tags: [parameters]
+
+RUN_MODELS   = True
+SAMPLE       = 3
+```
+
+
+# 1. Initial setting
+
+## Loading packages
+
+```{python}
+#| label: setup
+
+%run -i code/00_setup.py
+```
+
+[Back to top](#top)
+
+
+# 2. Data preparation
+
+This study used a randomly sampled two million records (one million for training and the rest for testing) of all births in the 50 states and the District of Columbia in the US by using the birth data collected in 2024 provided by the National Center for Health Statistics (NCHS) of the Centers for Disease Control and Prevention (CDC). This database provides records of all births in the US reported through the birth certificate required by state laws. The data includes the information of infants, sociodemographic characteristics of parents, and maternal risk factors. The initial dataset included 8,553,208 records. The training data was pulled from the years 2016 and 2017, while using the 2018 data for testing. The study period was limited to after 2016 because this was the first year that all the US states have completed the adoption of the 2003 revised birth certificate.
+
+## Data and recode
+
+```{python}
+#| label: data-prep
+
+if DATA_CACHE.exists():
+    df = pd.read_parquet(DATA_CACHE)
+    target_vars = list(df.columns)
+    pred_vars = [v for v in target_vars if v not in ["ptb", "lbw", "combgest", "dbwt"]]
+    print(f"Loaded {DATA_CACHE.name}: {len(df):,} records, {len(pred_vars)} predictors")
+else:
+    %run -i code/01_read_data.py
+    %run -i code/02_recode.py
+```
+
+## Variable summary
+
+```{python}
+#| label: tbl-varsummary
+#| tbl-cap: "Missingness and positive rate by variable"
+
+rows = []
+for var in target_vars:
+    ser = df[var]
+    n_total, n_missing = len(ser), ser.isna().sum()
+    n_nonmiss, n_pos = n_total - n_missing, ser.eq(1).sum()
+    rows.append({"variable": var, "Total": n_total,
+                 "pct_missing": n_missing / n_total * 100,
+                 "n_positive": n_pos,
+                 "pct_positive": n_pos / n_nonmiss * 100 if n_nonmiss else pd.NA,
+                 "min": ser.min(), "max": ser.max()})
+var_summary = pd.DataFrame(rows).set_index("variable").round(1)
+var_summary
+```
+
+[Back to top](#top)
+
+
+## Data exclusion and split
+
+```{python}
+#| label: split
+
+%run -i code/03_split.py
+sample_sizes
+```
+
+[Back to top](#top)
+
+
+# 3. Data review
+
+## eSupp. PTB by maternal age
+
+```{python}
+#| label: fig-corr
+
+df_stat = (df_s1.groupby("mager")
+           .agg(obs_count=("ptb", "size"), ptb_prob=("ptb", "mean"))
+           .reset_index())
+
+BAR, LINE = "#c9d6e3", "#b5473c"
+
+fig = make_subplots(specs=[[{"secondary_y": True}]])
+fig.add_trace(
+    go.Bar(x=df_stat["mager"], y=df_stat["obs_count"], name="Births",
+           marker_color=BAR, marker_line_width=0,
+           hovertemplate="Age %{x}<br>%{y:,.0f} births<extra></extra>"),
+    secondary_y=False)
+fig.add_trace(
+    go.Scatter(x=df_stat["mager"], y=df_stat["ptb_prob"], name="PTB probability",
+               mode="lines+markers", line=dict(color=LINE, width=2.5),
+               marker=dict(size=6, color=LINE),
+               hovertemplate="Age %{x}<br>PTB %{y:.1%}<extra></extra>"),
+    secondary_y=True)
+
+fig.update_layout(
+    template="simple_white",
+    font=dict(family="Helvetica Neue, Arial, sans-serif", size=13, color="#333"),
+    hovermode="x unified",
+    bargap=0.15,
+    legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="left", x=0,
+                bgcolor="rgba(0,0,0,0)"),
+    margin=dict(l=60, r=60, t=50, b=50),
+    height=420,
+)
+fig.update_xaxes(title_text="Maternal age (years)", dtick=5, showgrid=False)
+fig.update_yaxes(title_text="Births", tickformat=",", showgrid=True,
+                 gridcolor="#eee", secondary_y=False)
+fig.update_yaxes(title_text="% PTB", tickformat=".0%", showgrid=False,
+                 rangemode="tozero", secondary_y=True)
+
+fig.write_image(OUT / "eSupp_by_age.svg", width=900, height=420)
+fig
+```
+
+[Back to top](#top)
+
+
+# 4. Prediction
+
+```{python}
+#| label: cv-setup
+
+%run -i code/04_cv.py
+data = samples[SAMPLE]
+scale_pos_weight = (data["y_train"] == 0).sum() / (data["y_train"] == 1).sum()
+print(f"Sample {SAMPLE}: train {len(data['y_train']):,}  test {len(data['y_test']):,}  "
+      f"PTB rate {data['y_train'].mean():.3f}  scale_pos_weight {scale_pos_weight:.2f}")
+```
+
+## Random Forest
+
+```{python}
+#| label: rf
+
+# ── Setup
+# 0 = Pilot 50K
+# 1 = All   (df_s1)
+# 2 = 40+  (df_s2)
+# 3 = Previous PTB (df_s3)
+SAMPLE     = 0
+RUN_MODELS = True
+N_JOBS     = -1
+THRESHOLD  = 0.5
+
+data = samples[SAMPLE]
+scale_pos_weight = (data["y_train"] == 0).sum() / (data["y_train"] == 1).sum()
+print(f"Sample {SAMPLE}: train {len(data['y_train']):,}  test {len(data['y_test']):,}  "
+      f"PTB rate {data['y_train'].mean():.3f}  scale_pos_weight {scale_pos_weight:.2f}")
+
+
+# ── Reporting
+from sklearn.metrics import roc_auc_score, average_precision_score, confusion_matrix
+
+_report = []
+
+def report(name, model, data, threshold=THRESHOLD):
+    y = data["y_test"]
+    p = model.predict_proba(data["X_test"])[:, 1]
+    tn, fp, fn, tp = confusion_matrix(y, (p >= threshold).astype(int)).ravel()
+    row = {"model": name, "sens": tp / (tp + fn), "spec": tn / (tn + fp),
+           "auc": roc_auc_score(y, p), "aucpr": average_precision_score(y, p)}
+    _report.append(row)
+    print(f"[{name:<14}] Sens {row['sens']:.3f}  Spec {row['spec']:.3f}  "
+          f"AUC {row['auc']:.3f}  AUCPR {row['aucpr']:.3f}")
+    return row
+
+
+# ── Random Forest
+rf_grid = {
+    "model__n_estimators":      [100, 200, 300, 400, 500],
+    "model__max_features":      ["sqrt", "log2", 0.3, 0.5, None],   # = mtry
+    "model__max_depth":         [5, 9, 15, None],
+    "model__min_samples_leaf":  [1, 3, 5],
+    "model__min_samples_split": [2],
+    "model__bootstrap":         [True],
+}
+
+if RUN_MODELS:
+    res_rf, best_rf = run_grid(
+        "RandomForest",
+        RandomForestClassifier(n_jobs=1, class_weight="balanced", random_state=SEED),
+        rf_grid, data, refit="roc_auc")
+    save_results(res_rf, SAMPLE, "RF")
+    report("RandomForest", best_rf, data)
+else:
+    res_rf = load_latest(SAMPLE, "RF")
+
+res_rf.query("stage == 'Test'") if res_rf is not None else "no saved RF results"
+```
+
+[Back to top](#top)
+
+
+## XGBoost
+
+```{python}
+#| label: xgb
+
+xgb_grid = {
+    "model__n_estimators":     [50, 100, 500, 1000],
+    "model__max_depth":        [3, 5, 7, 9],
+    "model__learning_rate":    [0.2],
+    "model__subsample":        [0.6, 0.8, 1.0],
+    "model__colsample_bytree": [0.6, 0.8, 1.0],
+    "model__gamma":            [0, 1, 5],
+    "model__min_child_weight": [1, 3, 5],
+    "model__scale_pos_weight": [scale_pos_weight],
+}
+
+if RUN_MODELS:
+    res_xgb, best_xgb = run_grid(
+        "XGBoost",
+        XGBClassifier(eval_metric="logloss", n_jobs=1, random_state=SEED),
+        xgb_grid, data, refit="roc_auc")
+    save_results(res_xgb, SAMPLE, "XG")
+    report("XGBoost", best_xgb, data)
+else:
+    res_xgb = load_latest(SAMPLE, "XG")
+
+res_xgb.query("stage == 'Test'") if res_xgb is not None else "no saved XGBoost results"
+```
+
+[Back to top](#top)
+
+
+## LightGBM
+
+```{python}
+#| label: lgbm
+
+lgbm_grid = {
+    "model__learning_rate":     [0.2],
+    "model__n_estimators":      [1000],
+    "model__num_leaves":        [31],
+    "model__max_depth":         [1, 2, 3],
+    "model__min_child_samples": [20],
+    "model__min_split_gain":    [0],
+    "model__reg_alpha":         [0],
+    "model__reg_lambda":        [0],
+    "model__subsample":         [0.8],
+    "model__colsample_bytree":  [0.8],
+    "model__subsample_freq":    [1],
+    "model__max_bin":           [255],
+    "model__boosting_type":     ["dart"],
+}
+
+if RUN_MODELS:
+    res_lgbm, best_lgbm = run_grid(
+        "LightGBM",
+        LGBMClassifier(objective="binary", metric="binary_logloss", n_jobs=1,
+                       random_state=SEED, scale_pos_weight=scale_pos_weight, verbose=-1),
+        lgbm_grid, data, refit="roc_auc")
+    save_results(res_lgbm, SAMPLE, "LGBM")
+    report("LightGBM", best_lgbm, data)
+else:
+    res_lgbm = load_latest(SAMPLE, "LGBM")
+
+res_lgbm.query("stage == 'Test'") if res_lgbm is not None else "no saved LightGBM results"
+```
+
+[Back to top](#top)
+
+
+## Deep Neural Network
+
+```{python}
+#| label: dnn
+
+if RUN_MODELS:
+    import torch
+    import torch.nn as nn
+    from skorch import NeuralNetBinaryClassifier
+    from skorch.callbacks import EarlyStopping
+
+    DEVICE = ("cuda" if torch.cuda.is_available()
+              else "mps" if torch.backends.mps.is_available()
+              else "cpu")
+    print(f"[PyTorch] {DEVICE}")
+    torch.manual_seed(SEED)
+
+    class MLP(nn.Module):
+        def __init__(self, n_features, hidden_layers=2, units=64, dropout_rate=0.2):
+            super().__init__()
+            layers, in_dim = [], n_features
+            for _ in range(hidden_layers):
+                layers += [nn.Linear(in_dim, units), nn.ReLU(), nn.Dropout(dropout_rate)]
+                in_dim = units
+            layers.append(nn.Linear(in_dim, 1))
+            self.net = nn.Sequential(*layers)
+
+        def forward(self, X):
+            return self.net(X).squeeze(-1)
+
+    net = NeuralNetBinaryClassifier(
+        module=MLP,
+        module__n_features=None,
+        criterion=nn.BCEWithLogitsLoss,
+        criterion__pos_weight=torch.tensor([scale_pos_weight], dtype=torch.float32),
+        optimizer=torch.optim.Adam,
+        max_epochs=50,
+        batch_size=256,
+        device=DEVICE,
+        train_split=None,
+        verbose=0,
+    )
+
+    n_features = preprocessor.fit_transform(data["X_train"]).shape[1]
+    net.set_params(module__n_features=n_features)
+    print(f"# of features: {n_features}")
+
+    dnn_grid = {
+        "model__module__hidden_layers": [2, 3],
+        "model__module__units":         [64, 128],
+        "model__module__dropout_rate":  [0.2, 0.5],
+        "model__lr":                    [1e-3, 1e-4],
+        "model__batch_size":            [256, 512],
+        "model__max_epochs":            [50],
+    }
+
+    res_dnn, best_dnn = run_grid(
+        "DeepNeuralNetwork", net, dnn_grid, data, refit="roc_auc")
+    save_results(res_dnn, SAMPLE, "DNN")
+    report("DNN", best_dnn, data)
+else:
+    res_dnn = load_latest(SAMPLE, "DNN")
+
+res_dnn.query("stage == 'Test'") if res_dnn is not None else "no saved DNN results"
+```
+
+[Back to top](#top)
+
+
+# 5. Compiling
+
+## eSupp. Model comparison
+
+```{python}
+#| label: tbl-perf
+#| tbl-cap: "Hold-out performance of the best configuration per algorithm"
+frames = [r for r in [res_rf, res_xgb, res_lgbm, res_dnn] if r is not None]
+perf = (pd.concat(frames)
+          .query("stage == 'Test'")
+          .set_index("model")
+          [["balanced_accuracy", "sensitivity", "specificity", "roc_auc", "f1"]]
+          .round(3))
+perf.to_csv(OUT / f"tbl2_perf_S{SAMPLE}.csv")
+perf
+```
+
+## Top configurations by F1
+
+```{python}
+#| label: tbl-top5
+(pd.concat(frames).query("stage == 'CV'")
+   .sort_values("f1", ascending=False)
+   .head(5)
+   .dropna(axis=1, how="all"))
+```
+
+[Back to top](#top)

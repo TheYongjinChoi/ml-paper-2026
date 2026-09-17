@@ -1,0 +1,35 @@
+name: build-and-deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0        # 마지막 갱신일을 읽으려면 전체 이력이 필요합니다
+
+      # 대시보드(dashboard/index.qmd) 한 장만 렌더합니다.
+      # 참여자 원고는 이미 HTML로 올라와 있으므로 R은 필요 없습니다.
+      - uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: release
+
+      - name: 대시보드 생성
+        run: python3 scripts/build_site.py
+
+      - name: Cloudflare Pages 배포
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy docs --project-name=ml-paper-2026 --branch=main

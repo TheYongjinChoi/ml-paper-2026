@@ -1,0 +1,182 @@
+---
+title: "머신러닝 논문 연구모임 2026"
+subtitle: "분석결과 공유 페이지"
+format:
+  html:
+    embed-resources: true
+    css: dashboard.css
+    theme: cosmo
+    toc: false
+    lang: ko
+    include-in-header:
+      text: |
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
+---
+
+<!-- Hypothesis 코멘트 스크립트는 빌드할 때 자동으로 붙습니다.
+     여기에 직접 넣으면 embed-resources 가 인라인하면서 깨집니다. -->
+
+
+::: {.note}
+머신러닝 연구모임 분석결과 공유 페이지입니다. 서로 작업결과 공유를 원활하게 공유하기 위해 작성되었습니다. 각자 작업하신 마크다운 스크립트를 렌더링하시면 이 대시보드에 주기적으로 자동 반영됩니다.
+:::
+
+## 참여자별 원고
+
+<!-- 아래 표는 scripts/build_site.py에서 생성 -->
+
+{{< include _status.md >}}
+
+## 폴더 구조
+
+이 연구모임에서는 서로 코드와 분석 결과를 공유하기 위해 깃허브를 활용합니다. 미리 만들어 둔 폴더 구조를 유지하면서 작업해 주세요. 각자 본인 폴더 안에서만 작업하시고, 다른 사람 폴더나 바깥 파일은 수정하지 마세요.
+
+```
+ml-paper-2026/
+│
+├── projects/                  ← 참여자 작업 공간
+│   ├── ahyoung.lim/
+│   ├── brbak/
+│   ├── chwoun0515/
+│   ├── gayle8984/
+│   ├── juhee1084/
+│   ├── sjpark_0826/
+│   ├── yongjin.choi/          ← 본인 아이디 폴더에서만 작업
+│   │   ├── _master.qmd            원고 겸 분석 문서. 여기를 수정합니다
+│   │   ├── _master.html           렌더링 결과물. 이 파일이 공유 페이지에 업데이트됩니다
+│   │   ├── references.bib         참고문헌(필요할 경우). bibtex 형식으로 작성합니다
+│   │   ├── code/                  길어진 코드를 떼어 둘 때
+│   │   ├── data/                  데이터. 깃허브에 올라가지 않습니다
+│   │   └── output/               공개해도 되는 표나 그림
+│   ├── youngsung.kim/
+│   └── zxcv1977/
+│
+├── dashboard/                 ← 이 페이지의 원본 (운영자가 관리)
+├── scripts/                   ← 공유 페이지 생성 스크립트 (운영자가 관리)
+├── docs/                      ← 배포되는 웹문서
+├── theme-light.scss           ← 마크다운 공통 서식
+└── styles.css                 ← 마크다운 공통 서식
+```
+
+여러분의 각자 작업폴더에서 `data/` 는 깃허브에 올라가지 않도록 설정되어 있습니다. 업로드를 원하지 않는 데이터는 `data/` 안에 두시면 됩니다.
+
+## 모듈화 코딩
+
+워크숍에서 다루지는 않았지만, 한 가지 덧붙일 것이 있습니다. 분석 코드는 기본적으로 `_master.qmd` 안에 작성하되, 길어지면 `projects/본인아이디/code/` 안에 여러 스크립트로 나누어 두는 편이 낫습니다. 예를 들면 이렇게 나눕니다.
+
+```
+code/
+├── 01_data.R          데이터 불러오기와 전처리
+├── 02_descriptive.R   기술통계
+├── 03_estimation.R    모형 추정
+└── 04_plot.R          그림
+```
+
+그리고나서 `_master.qmd` 에서는 필요한 스크립트를 불러다 쓰면 됩니다.
+
+```r
+source("code/01_data.R")
+```
+
+이렇게 나누면 수정할 부분을 찾기 쉽고, 데이터 분석 구조를 한눈에 볼 수 있습니다. 또한, `_master.qmd` 안에 코드가 길어지면 화면 로딩 속도가 느려질 수 있는데, 이렇게 나누면 렌더링 속도도 빨라집니다.
+
+
+## 사용 안내
+
+<details>
+<summary>처음 한 번만: 설치와 내려받기</summary>
+
+**1. 초대 수락**
+
+메일로 온 GitHub 저장소 초대 링크를 눌러 수락합니다. 저장소가 비공개라서 이걸 먼저해야 다음 단계가 진행됩니다. GitHub 계정이 없으면 [https://github.com/](https://github.com/)에서 가입부터 하세요.
+
+**2. Git 설치**
+
+GitHub를 사용하기 위해 Git을 먼저 설치해야 합니다. Git은 파일이 언제 어떻게 바뀌었는지 기록해 두는 소프트웨어입니다. 수정할 때마다 버전이 쌓여서 이전 상태로 되돌릴 수 있고, 여러 사람이 같은 폴더를 써도 서로의 작업이 덮어써지지 않습니다. GitHub는 그 기록을 인터넷에 보관하는 서비스입니다.
+
+[git-scm.com/downloads](https://git-scm.com/downloads)에서 설치 파일을 받아 실행합니다. 선택지가 여러 번 나오는데 전부 기본값으로 두고 Next를 누르면 됩니다.
+
+**3. 터미널 열기**
+
+이제는 GitHub와 소통을 시작할 차례입니다. Positron이나 VS Code를 실행하고 메뉴에서 **Terminal → New Terminal**을 선택합니다. 
+(단축키: macOS `Ctrl` + `Shift` + `` ` ``, Windows `Ctrl` + `~`)
+
+화면 아래쪽에 검은 창(터미널)이 열리고 커서가 깜빡이면 준비된 상태입니다. Git이 올바르게 설치되었는지 아래 명령어로 확인해 봅니다.
+
+```bash
+git --version
+```
+
+`git version 2.x.x` 처럼 나오면 됩니다. 명령어를 못 찾는다는 메시지가 나오면 IDE를 껐다 다시 켜 보세요.
+
+**4. 이름과 이메일 등록**
+
+웹서비스를 처음 사용할 때 아이디와 비밀번호를 사용해 로그인 하듯히 GitHub와 상호작용을 할때도 계정정보가 필요합니다. 깃허브의 계정정보는 회원가입 시 만든 사용자 아이디와 이메일을 사용합니다. 터미널에서 아래와 같이 GitHub 가입할 때 사용한 아이디와 이메일을 입력하세요.
+
+```bash
+git config --global user.name "본인 이름"
+git config --global user.email "본인이메일@example.com"
+```
+
+**5. 작업 폴더 만들고 저장소 내려받기**
+
+이제 분석을 진행할 작업 폴더를 만들 차례입니다. 저장소를 통째로 내 컴퓨터에 복제하는 과정이라, 한 번만 하면 됩니다. 로컬머신에 작업 폴더를 하나 만들고 거기에 저장소를 내려받습니다. 터미널에서 아래 명령어를 실행합니다. 그리고 나서 Positron이나 VS Code에서 해당 폴더를 열고 터미널에서 아래 명령어를 실행합니다. 그럼 그 폴더로 GitHub 저장소가 여러분의 로컬 폴더에 복제가 됩니다. 이렇게 하면 작업할 준비가 완료됩니다.
+
+```bash
+git clone https://github.com/TheYongjinChoi/ml-paper-2026.git .
+```
+
+마지막 줄 끝의 점(`.`)은 "지금 있는 폴더에 그대로 받으라"는 뜻입니다. 이 점을 없애면 `ml-paper-2026` 안에 같은 이름의 폴더가 하나 더 생겨서 경로가 한 단계 더 생깁니다.
+
+`projects` 폴더로 들어가면 본인 아이디로 된 폴더가 있습니다. 그 안에 `_master.qmd` 가 들어 있고, 앞으로 이 폴더 안에서만 작업하면 됩니다. 다른 사람 폴더나 바깥 파일은 건드리지 않습니다.
+
+</details>
+
+<details>
+<summary>업데이트 할 때 절차와 사용할 Git 명령어</summary>
+
+터미널에서 저장소 폴더로 이동한 뒤 진행합니다.
+
+```bash
+cd ~/ml-paper-2026
+```
+
+**1. 최신 내용 받기**
+
+다른 사람이 올린 변경사항을 먼저 가져옵니다. 이걸 건너뛰면 나중에 올릴 때 막힐 수 있습니다.
+
+```bash
+git pull
+```
+
+**2. 원고 수정**
+
+`projects/본인아이디/_master.qmd` 를 Positron이나 RStudio에서 열어 수정합니다.
+
+**3. 렌더링**
+
+```bash
+quarto render projects/본인아이디/_master.qmd
+```
+
+같은 폴더에 `_master.html` 이 만들어집니다. 브라우저로 열어 결과를 확인하세요.
+
+**4. 기록에 남기기**
+
+```bash
+git add projects/본인아이디
+git commit -m "무엇을 했는지 짧게"
+```
+
+`git add` 는 올릴 파일을 고르는 단계, `git commit` 은 그 상태를 기록으로 남기는 단계입니다. 메시지는 "기술통계 추가" 처럼 나중에 봐도 알아볼 수 있게 적으면 됩니다.
+
+**5. 올리기**
+
+```bash
+git push
+```
+
+몇 분 뒤 이 표에 반영됩니다. `_master.html` 을 함께 올려야 반영되니, 렌더하지 않고 `.qmd` 만 올리면 결과 공유 페이지는 변경되지 않습니다.
+
+</details>
