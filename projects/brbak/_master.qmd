@@ -1,0 +1,91 @@
+---
+title: "프로젝트명""
+author: ""
+date: today
+format:
+  html:
+    embed-resources: true
+    toc: true
+    toc-depth: 3
+    code-fold: true
+    theme: paper
+execute:
+  echo: true
+  warning: false
+---
+
+# 1. Initial setting
+
+## Loading packages
+
+```{r}
+#| label: setup
+
+source("code/initial.R")
+```
+
+[Back to top](#top)
+
+
+# 2. Data preparation
+
+```{r}
+#| label: data-prep
+
+source("code/01_data.R")
+```
+
+[Back to top](#top)
+
+
+## Data exclusion and split
+
+```{r}
+#| label: split
+
+```
+
+[Back to top](#top)
+
+
+# 3. Data review
+
+## Descriptive statistics
+
+```{r}
+#| label: descriptive
+
+
+```
+
+[Back to top](#top)
+
+
+# 4. Estimation
+
+```{r}
+#| label: estimation
+
+
+```
+
+[Back to top](#top)
+
+
+# 5. Vizualization
+
+## Figure 1. xxx
+
+```{r}
+#| label: fig1
+
+```
+
+## Figure 2. xxx
+
+```{r}
+#| label: fig2
+
+```
+
+[Back to top](#top)
