@@ -5,6 +5,11 @@ on:
     branches: [main]
   workflow_dispatch:
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 concurrency:
   group: pages
   cancel-in-progress: true
@@ -16,10 +21,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0        # 마지막 갱신일을 읽으려면 전체 이력이 필요합니다
+          fetch-depth: 0
 
-      # 대시보드(dashboard/index.qmd) 한 장만 렌더합니다.
-      # 참여자 원고는 이미 HTML로 올라와 있으므로 R은 필요 없습니다.
       - uses: quarto-dev/quarto-actions/setup@v2
         with:
           version: release
@@ -27,9 +30,19 @@ jobs:
       - name: 대시보드 생성
         run: python3 scripts/build_site.py
 
-      - name: Cloudflare Pages 배포
-        uses: cloudflare/wrangler-action@v3
+      - name: Jekyll 비활성화
+        run: touch docs/.nojekyll
+
+      - uses: actions/upload-pages-artifact@v3
         with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy docs --project-name=ml-paper-2026 --branch=main
+          path: docs
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
