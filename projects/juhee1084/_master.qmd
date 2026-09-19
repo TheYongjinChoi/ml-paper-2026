@@ -1,33 +1,41 @@
 ---
-title: "프로젝트명""
-author: ""
+title: "북한의 가뭄 변동과 지역별 쌀 가격의 관계: 평양·신의주·혜산 월별 패널자료를 이용한 실증분석"
+author: "정주희"
 date: today
+lang: ko
+
 format:
   html:
     embed-resources: true
     toc: true
     toc-depth: 3
+    number-sections: false
     code-fold: true
+    code-summary: "코드 보기"
     theme: paper
+
 execute:
   echo: true
   warning: false
+  message: false
 ---
 
-# 1. Initial setting
+# 1. Initial setting {#top}
 
 ## Loading packages
 
 ```{r}
 #| label: setup
 
-source("code/initial.R")
+source("code/00_initial.R")
 ```
 
 [Back to top](#top)
 
 
 # 2. Data preparation
+
+## 2.1 Data import and preprocessing
 
 ```{r}
 #| label: data-prep
@@ -38,11 +46,138 @@ source("code/01_data.R")
 [Back to top](#top)
 
 
-## Data exclusion and split
+## 2.2 Missing precipitation treatment
+
+
+### 2.2.1 Precipitation without imputation
 
 ```{r}
-#| label: split
+#| label: missing-precip-raw
 
+source("code/02_01_precip_raw.R")
+```
+
+[Back to top](#top)
+
+
+### 2.2.2 Temperature-based zero replacement
+
+```{r}
+#| label: missing-precip-zero
+
+source("code/02_02_precip_zero.R")
+```
+
+[Back to top](#top)
+
+
+
+### 2.2.3 Precipitation with multiple imputation 
+
+```{r}
+#| label: missing-precip-mi
+
+source("code/02_03_precip_mi.R")
+```
+
+[Back to top](#top)
+
+
+### 2.2.4 Precipitation with Random Forest
+
+```{r}
+#| label: missing-precip-rf
+
+source("code/02_04_precip_rf.R")
+```
+
+[Back to top](#top)
+
+
+### 2.2.5 Precipitation with XGBoost
+```{r}
+#| label: missing-precip-xgb
+
+source("code/02_05_precip_xgb.R")
+```
+
+[Back to top](#top)
+
+
+### 2.2.6 Validation and comparison of Precipitation treatments 
+
+```{r}
+#| label: missing-precip-val
+
+source("code/02_06_precip_validation.R")
+```
+
+[Back to top](#top)
+
+
+### 2.2.7 Missing Precipitation Treatment Summary
+
+```{r}
+#| label: missing-precip
+
+source("code/02_07_missing_precip.R")
+```
+
+[Back to top](#top)
+
+
+## 2.3 Drought index construction
+
+### 2.3.1 SPI
+
+```{r}
+#| label: spi
+
+source("code/03_01_spi.R")
+```
+
+[Back to top](#top)
+
+
+### 2.3.2 SPEI
+
+```{r}
+#| label: spei
+
+source("code/03_02_spei.R")
+```
+
+[Back to top](#top)
+
+
+### 2.3.3 SMI
+
+```{r}
+#| label: smi
+
+source("code/03_03_smi.R")
+```
+
+[Back to top](#top)
+
+
+### 2.3.4 Drought Indices Summary
+
+```{r}
+#| label: drought-index
+
+source("code/03_04_drought_indices_summary.R")
+```
+
+[Back to top](#top)
+
+
+## 2.4 Final dataset
+
+```{r}
+#| label: final-dataset
+
+source("code/04_final_dataset.R")
 ```
 
 [Back to top](#top)
@@ -50,12 +185,12 @@ source("code/01_data.R")
 
 # 3. Data review
 
-## Descriptive statistics
+## 3.1 Descriptive statistics
 
 ```{r}
 #| label: descriptive
 
-
+source("code/05_00_descriptive.R")
 ```
 
 [Back to top](#top)
@@ -63,25 +198,74 @@ source("code/01_data.R")
 
 # 4. Estimation
 
+
+## 4.1 Pooled estimation
+
 ```{r}
-#| label: estimation
+#| label: pooled-estimation
 
-
+source("code/06_01_pooled_estimation.R")
 ```
 
 [Back to top](#top)
 
 
-# 5. Vizualization
+## 4.2 Region-specific estimation
 
-## Figure 1. xxx
+```{r}
+#| label: region-estimation
+
+source("code/06_02_region_estimation.R")
+```
+
+[Back to top](#top)
+
+
+
+## 4.3 Lagged effects
+
+```{r}
+#| label: lagged-effects
+
+source("code/06_03_lagged_effects.R")
+```
+
+[Back to top](#top)
+
+
+
+## 4.4 Robustness checks
+
+```{r}
+#| label: robustness
+
+source("code/06_04_robustness.R")
+```
+
+[Back to top](#top)
+
+
+## 4.5 Estimation summary 
+
+```{r}
+#| label: estimation
+
+source("code/06_05_estimation_summary.R")
+```
+
+[Back to top](#top)
+
+
+# 5. Visualization
+
+## 5.1 Figure 1. xxx
 
 ```{r}
 #| label: fig1
-
+source("code/07_00_plot.R")
 ```
 
-## Figure 2. xxx
+## 5.2 Figure 2. xxx
 
 ```{r}
 #| label: fig2
