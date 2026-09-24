@@ -38,13 +38,321 @@ source("code/00_initial.R")
 ## 2.1 Data import and preprocessing
 
 ```{r}
-#| label: data-prep
+#| label: data-prep                 
+#| include: false                   
 
-source("code/01_data.R")
+source("code/01_01_data_weather_rice.R")  
+source("code/01_02_asiapress.R")       
+```
+
+
+### Precipitation data
+
+The daily precipitation data cover 27 weather stations from January 1973 to July 2026. The precipitation variable has a missing rate of 66.28%. Missing precipitation values are addressed in scripts `02_00`–`02_07` before aggregation to the monthly level.
+
+```{r}
+#| echo: true
+
+precip_summary <- tibble(
+  item = c(
+    "Number of weather stations",
+    "Start date",
+    "End date",
+    "Total observations",
+    "Observed precipitation",
+    "Missing precipitation",
+    "Missing rate (%)",
+    "Zero precipitation",
+    "Positive precipitation"
+  ),
+  value = c(
+    n_distinct(weather_daily_raw$station),
+    as.character(min(weather_daily_raw$date, na.rm = TRUE)),
+    as.character(max(weather_daily_raw$date, na.rm = TRUE)),
+    format(
+      nrow(weather_daily_raw),
+      big.mark = ",",
+      scientific = FALSE
+    ),
+    format(
+      sum(!is.na(weather_daily_raw$precipitation_total_day)),
+      big.mark = ",",
+      scientific = FALSE
+    ),
+    format(
+      sum(is.na(weather_daily_raw$precipitation_total_day)),
+      big.mark = ",",
+      scientific = FALSE
+    ),
+    round(
+      mean(is.na(weather_daily_raw$precipitation_total_day)) * 100,
+      2
+    ),
+    format(
+      sum(
+        weather_daily_raw$precipitation_total_day == 0,
+        na.rm = TRUE
+      ),
+      big.mark = ",",
+      scientific = FALSE
+    ),
+    format(
+      sum(
+        weather_daily_raw$precipitation_total_day > 0,
+        na.rm = TRUE
+      ),
+      big.mark = ",",
+      scientific = FALSE
+    )
+  )
+)
+
+knitr::kable(
+  precip_summary,
+  col.names = c("Item", "Value"),
+  align = c("l", "c"),
+  caption = "Summary of daily precipitation data"
+)
+```
+
+
+### Rice price data (Daily NK)
+
+Rice price observations for Pyongyang, Sinuiju, and Hyesan are aggregated to monthly averages. The data cover January 2013 to July 2026. Months without observations are retained as missing.
+
+
+```{r}
+#| echo: true
+
+rice_summary <- tibble(
+  item = c(
+    "Number of original observations",
+    "Start date",
+    "End date",
+    "Number of total months",
+    "Number of observed months",
+    "Number of missing months"
+  ),
+  value = c(
+    nrow(rice_price_obs),
+    as.character(min(rice_price_obs$date, na.rm = TRUE)),
+    as.character(max(rice_price_obs$date, na.rm = TRUE)),
+    nrow(all_months),
+    nrow(rice_price_monthly),
+    nrow(missing_rice_months)
+  )
+)
+
+knitr::kable(
+  rice_summary,
+  col.names = c("Item", "Value"),
+  align = c("l", "c"),
+  caption = "Summary of rice price data"
+)
+```
+
+
+Months without rice price observations are shown below. These months are retained as missing and are not interpolated.
+
+```{r}
+#| echo: true
+
+missing_rice_months |>
+  knitr::kable(
+    col.names = "Missing month",
+    align = "c",
+    caption = "Months without rice price observations"
+  )
+```
+
+
+The following table reports descriptive statistics for monthly mean rice prices in the three study locations.
+
+```{r}
+#| echo: true
+
+rice_descriptive <- rice_price_monthly |>
+  select(
+    rice_pyongyang,
+    rice_sinuiju,
+    rice_hyesan
+  ) |>
+  pivot_longer(
+    everything(),
+    names_to = "region",
+    values_to = "rice_price"
+  ) |>
+  mutate(
+    region = recode(
+      region,
+      rice_pyongyang = "Pyongyang",
+      rice_sinuiju   = "Sinuiju",
+      rice_hyesan    = "Hyesan"
+    )
+  ) |>
+  group_by(region) |>
+  summarise(
+    N    = sum(!is.na(rice_price)),
+    Mean = mean(rice_price, na.rm = TRUE),
+    SD   = sd(rice_price, na.rm = TRUE),
+    Min  = min(rice_price, na.rm = TRUE),
+    Max  = max(rice_price, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+knitr::kable(
+  rice_descriptive,
+  digits = 1,
+  col.names = c(
+    "Region",
+    "N",
+    "Mean",
+    "SD",
+    "Min",
+    "Max"
+  ),
+  align = c("l", "c", "c", "c", "c", "c"),
+  caption = "Descriptive statistics of monthly rice prices"
+)
+```
+
+
+The monthly series shows the evolution of rice prices across Pyongyang, Sinuiju, and Hyesan, with a marked acceleration in prices beginning in June 2025 and a particularly sharp increase in August 2025.
+
+```{r}
+#| echo: true
+
+rice_price_monthly_plot
+```
+
+For descriptive purposes, months in which rice prices increased by 20% or more from the preceding month are summarized below.
+
+```{r}
+#| echo: true
+
+knitr::kable(
+  rice_price_increase_table,
+  col.names = c(
+    "Month",
+    "Pyongyang",
+    "Sinuiju",
+    "Hyesan"
+  ),
+  align = c("l", "c", "c", "c"),
+  caption = "Monthly rice price increases of 20% or more"
+)
 ```
 
 [Back to top](#top)
 
+
+## Supplementary market data: AsiaPress
+
+AsiaPress provides observations on rice, corn, fuel prices, and exchange rates in North Korean markets. 
+Because the survey locations vary over time, these data do not represent a fixed regional price series or a national average. 
+They are therefore used as supplementary evidence on broader market price movements rather than as the main dependent variable.
+
+The monthly analysis covers April 2017 through August 2026. Months with no survey observations are retained explicitly as missing.
+
+```{r}
+#| label: tbl-asiapress-summary
+#| echo: true
+
+asiapress_summary <- tibble(
+  item = c(
+    "Collection date",
+    "Observation start date",
+    "Observation end date",
+    "Monthly analysis start",
+    "Monthly analysis end",
+    "Cleaned observations",
+    "Number of monthly observations",
+    "Months with no survey observations"
+  ),
+
+  value = c(
+    as.character(collection_date),
+
+    as.character(
+      min(asiapress_data_clean$date, na.rm = TRUE)
+    ),
+
+    as.character(
+      max(asiapress_data_clean$date, na.rm = TRUE)
+    ),
+
+    min(asiapress_monthly$month),
+
+    max(asiapress_monthly$month),
+
+    nrow(asiapress_data_clean),
+
+    nrow(asiapress_monthly),
+
+    sum(asiapress_monthly$n_obs == 0)
+  )
+)
+
+knitr::kable(
+  asiapress_summary,
+  col.names = c("Item", "Value"),
+  align = c("l", "c"),
+  caption = "Summary of AsiaPress market data"
+)
+```
+
+
+The following figure compares the monthly movements of rice and corn prices reported by AsiaPress.
+
+```{r}
+#| label: fig-asiapress-rice-corn
+#| echo: true
+#| fig-width: 9
+#| fig-height: 5.5
+#| fig-cap: "Monthly rice and corn prices reported by AsiaPress"
+
+asiapress_rice_corn_plot
+```
+
+
+To examine the recent food-price surge, the largest year-on-year increases in rice and corn prices are reported below.
+
+```{r}
+#| label: tbl-asiapress-price-surge
+#| echo: true
+
+knitr::kable(
+  recent_price_surge_table_display,
+
+  col.names = c(
+    "Commodity",
+    "Month",
+    "Current price",
+    "Price 12 months earlier",
+    "YoY change (%)"
+  ),
+
+  align = c(
+    "l",
+    "c",
+    "c",
+    "c",
+    "c"
+  ),
+
+  caption = paste0(
+    "Largest year-on-year increases in rice and corn prices, ",
+    recent_period_label
+  )
+)
+```
+
+
+The AsiaPress series shows that rice prices entered a pronounced upward phase before the sharp increase in corn prices observed in 2026. 
+This temporal pattern is used only as descriptive evidence and does not by itself imply a causal relationship between rice and corn prices.
+
+
+[Back to top](#top)
 
 ## 2.2 Missing precipitation treatment
 
