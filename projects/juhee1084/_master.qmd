@@ -26,7 +26,6 @@ execute:
 
 ```{r}
 #| label: setup
-
 source("code/00_initial.R")
 ```
 
@@ -120,7 +119,6 @@ knitr::kable(
 
 Rice price observations for Pyongyang, Sinuiju, and Hyesan are aggregated to monthly averages. The data cover January 2013 to July 2026. Months without observations are retained as missing.
 
-
 ```{r}
 #| echo: true
 
@@ -150,7 +148,6 @@ knitr::kable(
   caption = "Summary of rice price data"
 )
 ```
-
 
 Months without rice price observations are shown below. These months are retained as missing and are not interpolated.
 
@@ -215,7 +212,6 @@ knitr::kable(
   caption = "Descriptive statistics of monthly rice prices"
 )
 ```
-
 
 The monthly series shows the evolution of rice prices across Pyongyang, Sinuiju, and Hyesan, with a marked acceleration in prices beginning in June 2025 and a particularly sharp increase in August 2025.
 
@@ -299,8 +295,132 @@ knitr::kable(
   align = c("l", "c"),
   caption = "Summary of AsiaPress market data"
 )
+
 ```
 
+This part illustrates the overall flow of variables for the AsiaPress data all at once.
+
+```{r}
+#| label: fig-asiapress-market-variables
+#| echo: true
+#| fig-width: 9
+#| fig-height: 7
+#| fig-cap: "Monthly trends in AsiaPress market variables"
+
+asiapress_monthly_plot
+```
+
+The following figure compares monthly rice prices reported by Daily NK for Pyongyang, Sinuiju, and Hyesan with the supplementary AsiaPress rice price series. Because the survey locations of AsiaPress vary over time, the comparison is used only as supplementary descriptive evidence and should not be interpreted as a comparison with a fixed national or regional price series.
+
+
+```{r}
+#| label: fig-rice-price-comparison
+#| echo: true
+#| fig-width: 9
+#| fig-height: 5.5
+#| fig-cap: "Monthly rice price trends: Daily NK and AsiaPress"
+
+
+# Daily NK
+dailynk_rice_compare <- rice_price_monthly |>
+
+  mutate(
+    month_date = as.Date(
+      paste0(month, "-01")
+    )
+  ) |>
+
+  select(
+    month_date,
+    rice_pyongyang,
+    rice_sinuiju,
+    rice_hyesan
+  ) |>
+
+  pivot_longer(
+    cols = starts_with("rice_"),
+    names_to = "source",
+    values_to = "rice_price"
+  ) |>
+
+  mutate(
+    source = recode(
+      source,
+      rice_pyongyang = "Daily NK - Pyongyang",
+      rice_sinuiju   = "Daily NK - Sinuiju",
+      rice_hyesan    = "Daily NK - Hyesan"
+    )
+  )
+
+
+# AsiaPress
+asiapress_rice_compare <- asiapress_monthly |>
+
+  mutate(
+    month_date = as.Date(
+      paste0(month, "-01")
+    )
+  ) |>
+
+  transmute(
+    month_date,
+    source = "AsiaPress",
+    rice_price = rice_asiapress
+  )
+
+
+# Combine the two data sources
+rice_price_comparison <- bind_rows(
+  dailynk_rice_compare,
+  asiapress_rice_compare
+)
+
+
+# Plot monthly rice price trends
+rice_price_comparison_plot <- ggplot(
+  rice_price_comparison,
+  aes(
+    x = month_date,
+    y = rice_price,
+    color = source
+  )
+) +
+
+  geom_line(
+    linewidth = 1,
+    na.rm = TRUE
+  ) +
+
+  scale_x_date(
+    date_breaks = "1 year",
+    date_labels = "%Y"
+  ) +
+
+  scale_y_continuous(
+    labels = scales::label_comma()
+  ) +
+
+  labs(
+    title = "Monthly Rice Price Trends",
+    subtitle = "Daily NK and AsiaPress",
+    x = "Year",
+    y = "Rice price (KPW/kg)",
+    color = "Data source"
+  ) +
+
+  theme_minimal() +
+
+  theme(
+    axis.text.x = element_text(
+      angle = 45,
+      hjust = 1
+    ),
+    legend.position = "top"
+  )
+
+
+rice_price_comparison_plot
+```
 
 The following figure compares the monthly movements of rice and corn prices reported by AsiaPress.
 
@@ -314,8 +434,8 @@ The following figure compares the monthly movements of rice and corn prices repo
 asiapress_rice_corn_plot
 ```
 
+To examine the recent food-price surge, the largest year-on-year increases in rice and corn prices are reported below. The AsiaPress series shows that rice prices entered a pronounced upward phase before the sharp increase in corn prices observed in 2026. This temporal pattern is used only as descriptive evidence and does not by itself imply a causal relationship between rice and corn prices.
 
-To examine the recent food-price surge, the largest year-on-year increases in rice and corn prices are reported below.
 
 ```{r}
 #| label: tbl-asiapress-price-surge
@@ -346,11 +466,6 @@ knitr::kable(
   )
 )
 ```
-
-
-The AsiaPress series shows that rice prices entered a pronounced upward phase before the sharp increase in corn prices observed in 2026. 
-This temporal pattern is used only as descriptive evidence and does not by itself imply a causal relationship between rice and corn prices.
-
 
 [Back to top](#top)
 
