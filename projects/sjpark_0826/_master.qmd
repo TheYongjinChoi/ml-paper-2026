@@ -1,6 +1,6 @@
 ---
 title: "test""
-author: ""
+author: "박성준"
 date: today
 format:
   html:
