@@ -1,6 +1,6 @@
 ---
-title: "프로젝트명""
-author: ""
+title: "서울사랑상품권 결제정보를 활용한 결제 패턴 분석 및 예측 모델링"
+author: "유하영"
 date: today
 format:
   html:
