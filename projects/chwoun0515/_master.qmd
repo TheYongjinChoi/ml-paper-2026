@@ -1,6 +1,6 @@
 ---
-title: "프로젝트명""
-author: ""
+title: "서울시 상권의 지역사회 경제 리질리언스 관련 요인과 취약성 예측: 코로나19 장기화·회복기 폐업 및 매출 경로의 비교를 중심으로"
+author: "원치현(국민대학교 행정학과)"
 date: today
 format:
   html:
@@ -21,7 +21,7 @@ execute:
 ```{r}
 #| label: setup
 
-source("code/initial.R")
+source("C:\Users\chwou\Desktop\graduate\04_analysis\workspace\ml-paper-2026\projects\chwoun0515\initial.R")
 ```
 
 [Back to top](#top)
@@ -32,7 +32,7 @@ source("code/initial.R")
 ```{r}
 #| label: data-prep
 
-source("code/01_data.R")
+source("")
 ```
 
 [Back to top](#top)
