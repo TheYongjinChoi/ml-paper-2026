@@ -21,7 +21,7 @@ execute:
 ```{r}
 #| label: setup
 
-source("C:\Users\chwou\Desktop\graduate\04_analysis\workspace\ml-paper-2026\projects\chwoun0515\initial.R")
+source("C:\Users\chwou\Desktop\graduate\04_analysis\workspace\ml-paper-2026\projects\chwoun0515\code\initial.R")
 ```
 
 [Back to top](#top)
@@ -32,7 +32,7 @@ source("C:\Users\chwou\Desktop\graduate\04_analysis\workspace\ml-paper-2026\proj
 ```{r}
 #| label: data-prep
 
-source("")
+source("C:\Users\chwou\Desktop\graduate\04_analysis\workspace\ml-paper-2026\projects\chwoun0515\code\data.R")
 ```
 
 [Back to top](#top)
