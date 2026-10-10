@@ -1,0 +1,19 @@
+{
+  "서울시 상권분석서비스(점포-상권)_2025년.csv": {
+    "rows": 302701,
+    "total_equal_general_plus_franchise": 302701,
+    "closure_rate_rounding_match": 300366,
+    "positive_denominator_rows": 300508
+  },
+  "서울시_상권분석서비스(점포-상권)_2021년.csv": {
+    "rows": 301814,
+    "total_equal_general_plus_franchise": 301814,
+    "closure_rate_rounding_match": 299611,
+    "positive_denominator_rows": 299772
+  },
+  "bank": {
+    "rows": 31440,
+    "missing": 21820,
+    "time_varying_districts": 0
+  }
+}
