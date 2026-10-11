@@ -1,4 +1,7 @@
-install.packages(c("readr", "dplyr", "purrr", "stringr"))
+install.packages(
+  c("readr", "dplyr", "purrr", "stringr"),
+  repos = "https://cloud.r-project.org"
+)
 
 library(readr)
 library(dplyr)
