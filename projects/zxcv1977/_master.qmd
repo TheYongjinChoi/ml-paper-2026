@@ -21,7 +21,7 @@ execute:
 ```{r}
 #| label: setup
 
-source("code/initial.R")
+# source("code/initial.R")
 ```
 
 [Back to top](#top)
@@ -32,7 +32,7 @@ source("code/initial.R")
 ```{r}
 #| label: data-prep
 
-source("code/01_data.R")
+# source("code/01_data.R")
 ```
 
 [Back to top](#top)

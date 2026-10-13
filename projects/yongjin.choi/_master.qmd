@@ -1,7 +1,15 @@
 ---
-title: "Code for \"Predicting Preterm Birth Using Machine Learning and Birth Certificate Records\""
+title: "Caregivers’ fake news detection ability predicts vaccine confidence and uptake of childhood immunizations"
 author: "Yongjin Choi (LSHTM, Yongjin.Choi@lshtm.ac.uk)"
 date: today
+abstract: |
+  **Background.** Exposure to misinformation has been linked to false beliefs that can shape political attitudes and adversely impact health outcomes, such as adoption of health interventions, including vaccines. Previous work has linked exposure to misinformation and the ability to identify fake news, but less is known about how individuals’ misinformation susceptibility links to vaccine confidence more broadly and plausibly impacts population-level uptake rates of childhood immunisations. We examined these relationships among caregivers and assessed whether they differed by political orientation.
+
+  **Methods.** We quantified caregivers’ susceptibility to misinformation using the 20-item Misinformation Susceptibility Test, administered in cross-sectional surveys of 14,555 caregivers of children in 2025 -- in the US (n=12,555), the UK (n=1000), and Canada (n=1000). We fitted Bayesian two-parameter logistic item response models to the fake- and real-news items separately, yielding individual-level estimates of ability to detect fake news, real news, and related response tendencies, while accounting for item-level differences and uncertainty in individual ability estimates. We then examined how these abilities related to caregivers’ vaccine confidence, political orientation, childhood MCV uptake, and whether the associations with vaccine confidence differed by political orientation. We also built a counterfactual model of MCV uptake to examine how differences in headline detection could translate into differences in vaccination uptake through vaccine confidence.
+
+  **Results.** Caregivers better able to identify fake news headlines reported higher vaccine confidence in all three countries and across all five vaccine confidence outcomes. In the US, a 1 standard deviation (SD) increase in fake-news detection ability corresponded to odds ratios of 1.40-1.72 (all 95% CIs excluded 1; P<0.0001). Each additional correctly rejected headline corresponded to a 1.7-2.3 percentage point higher predicted probability of vaccine confidence. Associations were also positive in the UK and Canada, although estimates were less precise. Real-news detection was also associated with vaccine confidence but more weakly in the US. Fake-news detection was lower among politically conservative caregivers in all three countries, particularly in the US and Canada. Counterfactual projections indicated higher MCV uptake at higher levels of fake-news detection in all three countries.
+
+  **Implication.** Vaccine attitudes reflect not only what caregivers know about vaccines but how well they can distinguish reliable information from misinformation. Caregiver decision-making determines health outcomes for their children: differences in caregiver discernment become not just a question of differences in cognitive traits, but a question of equity in child health. The association between fake-news headline detection, vaccine confidence, and projected MCV uptake suggests that misinformation susceptibility may be a modifiable pathway of public-health importance. Interventions strengthening caregivers’ information discernment are needed alongside efforts to depoliticise vaccines, particularly where these pressures are most acute, such as the USA, where exemptions to childhood vaccines have hit a record high.
 format:
   html:
     embed-resources: true
@@ -34,10 +42,16 @@ SAMPLE       = 3
 
 ## Loading packages
 
-```{python}
+```{r echo=TRUE, message=FALSE, warning=FALSE}
 #| label: setup
+#| message: false
+#| warning: false
 
-%run -i code/00_setup.py
+reticulate::py_require("plotly")
+reticulate::py_require("kaleido==0.2.1")
+source("code/00_initial.R")
+
+output <- "output/"
 ```
 
 [Back to top](#top)
@@ -45,53 +59,11 @@ SAMPLE       = 3
 
 # 2. Data preparation
 
-This study used randomly sampled two million records (one million for training and the rest for testing) of all births in the 50 states and the District of Columbia in the US by using the birth data collected in 2024 provided by the National Center for Health Statistics (NCHS) of the Centers for Disease Control and Prevention (CDC). This database provides records of all births in the US reported through the birth certificate required by state laws. The data includes the information of infants, sociodemographic characteristics of parents, and maternal risk factors. The initial dataset included 8,553,208 records. The training data was pulled from the years 2016 and 2017, while using the 2018 data for testing. The study period was limited to after 2016 because this was the first year that all the US states have completed the adoption of the 2003 revised birth certificate.
-
 ## Data and recode
 
-```{python}
-#| label: data-prep
-
-if DATA_CACHE.exists():
-    df = pd.read_parquet(DATA_CACHE)
-    target_vars = list(df.columns)
-    pred_vars = [v for v in target_vars if v not in ["ptb", "lbw", "combgest", "dbwt"]]
-    print(f"Loaded {DATA_CACHE.name}: {len(df):,} records, {len(pred_vars)} predictors")
-else:
-    %run -i code/01_read_data.py
-    %run -i code/02_recode.py
-```
-
-## Variable summary
-
-```{python}
-#| label: tbl-varsummary
-#| tbl-cap: "Missingness and positive rate by variable"
-
-rows = []
-for var in target_vars:
-    ser = df[var]
-    n_total, n_missing = len(ser), ser.isna().sum()
-    n_nonmiss, n_pos = n_total - n_missing, ser.eq(1).sum()
-    rows.append({"variable": var, "Total": n_total,
-                 "pct_missing": n_missing / n_total * 100,
-                 "n_positive": n_pos,
-                 "pct_positive": n_pos / n_nonmiss * 100 if n_nonmiss else pd.NA,
-                 "min": ser.min(), "max": ser.max()})
-var_summary = pd.DataFrame(rows).set_index("variable").round(1)
-var_summary
-```
-
-[Back to top](#top)
-
-
-## Data exclusion and split
-
-```{python}
-#| label: split
-
-%run -i code/03_split.py
-sample_sizes
+```{r}
+source("code/01_config.R")
+source("code/02_data_prep.R")
 ```
 
 [Back to top](#top)
@@ -99,293 +71,78 @@ sample_sizes
 
 # 3. Data review
 
-## eSupp. PTB by maternal age
+## Missing and descriptive statistics
 
-```{python}
-#| label: fig-corr
+```{r}
+source("code/03_descriptive.R")
+```
 
-df_stat = (df_s1.groupby("mager")
-           .agg(obs_count=("ptb", "size"), ptb_prob=("ptb", "mean"))
-           .reset_index())
+[Back to top](#top)
+</br>
 
-BAR, LINE = "#c9d6e3", "#b5473c"
 
-fig = make_subplots(specs=[[{"secondary_y": True}]])
-fig.add_trace(
-    go.Bar(x=df_stat["mager"], y=df_stat["obs_count"], name="Births",
-           marker_color=BAR, marker_line_width=0,
-           hovertemplate="Age %{x}<br>%{y:,.0f} births<extra></extra>"),
-    secondary_y=False)
-fig.add_trace(
-    go.Scatter(x=df_stat["mager"], y=df_stat["ptb_prob"], name="PTB probability",
-               mode="lines+markers", line=dict(color=LINE, width=2.5),
-               marker=dict(size=6, color=LINE),
-               hovertemplate="Age %{x}<br>PTB %{y:.1%}<extra></extra>"),
-    secondary_y=True)
+# 4. Bayesian 2PL IRT
 
-fig.update_layout(
-    template="simple_white",
-    font=dict(family="Helvetica Neue, Arial, sans-serif", size=13, color="#333"),
-    hovermode="x unified",
-    bargap=0.15,
-    legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="left", x=0,
-                bgcolor="rgba(0,0,0,0)"),
-    margin=dict(l=60, r=60, t=50, b=50),
-    height=420,
-)
-fig.update_xaxes(title_text="Maternal age (years)", dtick=5, showgrid=False)
-fig.update_yaxes(title_text="Births", tickformat=",", showgrid=True,
-                 gridcolor="#eee", secondary_y=False)
-fig.update_yaxes(title_text="% PTB", tickformat=".0%", showgrid=False,
-                 rangemode="tozero", secondary_y=True)
+## Fitting 2PL
 
-fig.write_image(OUT / "eSupp_by_age.svg", width=900, height=420)
-fig
+```{r}
+# source("code/04_irt_2pl.R")
 ```
 
 [Back to top](#top)
 
+## MIST scores
 
-# 4. Prediction
-
-```{python}
-#| label: cv-setup
-
-%run -i code/04_cv.py
-data = samples[SAMPLE]
-scale_pos_weight = (data["y_train"] == 0).sum() / (data["y_train"] == 1).sum()
-print(f"Sample {SAMPLE}: train {len(data['y_train']):,}  test {len(data['y_test']):,}  "
-      f"PTB rate {data['y_train'].mean():.3f}  scale_pos_weight {scale_pos_weight:.2f}")
-```
-
-## Random Forest
-
-```{python}
-#| label: rf
-
-# ── Setup
-# 0 = Pilot 50K
-# 1 = All   (df_s1)
-# 2 = 40+  (df_s2)
-# 3 = Previous PTB (df_s3)
-SAMPLE     = 0
-RUN_MODELS = True
-N_JOBS     = -1
-THRESHOLD  = 0.5
-
-data = samples[SAMPLE]
-scale_pos_weight = (data["y_train"] == 0).sum() / (data["y_train"] == 1).sum()
-print(f"Sample {SAMPLE}: train {len(data['y_train']):,}  test {len(data['y_test']):,}  "
-      f"PTB rate {data['y_train'].mean():.3f}  scale_pos_weight {scale_pos_weight:.2f}")
-
-
-# ── Reporting
-from sklearn.metrics import roc_auc_score, average_precision_score, confusion_matrix
-
-_report = []
-
-def report(name, model, data, threshold=THRESHOLD):
-    y = data["y_test"]
-    p = model.predict_proba(data["X_test"])[:, 1]
-    tn, fp, fn, tp = confusion_matrix(y, (p >= threshold).astype(int)).ravel()
-    row = {"model": name, "sens": tp / (tp + fn), "spec": tn / (tn + fp),
-           "auc": roc_auc_score(y, p), "aucpr": average_precision_score(y, p)}
-    _report.append(row)
-    print(f"[{name:<14}] Sens {row['sens']:.3f}  Spec {row['spec']:.3f}  "
-          f"AUC {row['auc']:.3f}  AUCPR {row['aucpr']:.3f}")
-    return row
-
-
-# ── Random Forest
-rf_grid = {
-    "model__n_estimators":      [100, 200, 300, 400, 500],
-    "model__max_features":      ["sqrt", "log2", 0.3, 0.5, None],   # = mtry
-    "model__max_depth":         [5, 9, 15, None],
-    "model__min_samples_leaf":  [1, 3, 5],
-    "model__min_samples_split": [2],
-    "model__bootstrap":         [True],
-}
-
-if RUN_MODELS:
-    res_rf, best_rf = run_grid(
-        "RandomForest",
-        RandomForestClassifier(n_jobs=1, class_weight="balanced", random_state=SEED),
-        rf_grid, data, refit="roc_auc")
-    save_results(res_rf, SAMPLE, "RF")
-    report("RandomForest", best_rf, data)
-else:
-    res_rf = load_latest(SAMPLE, "RF")
-
-res_rf.query("stage == 'Test'") if res_rf is not None else "no saved RF results"
+```{r}
+# source("code/05_mist_scores.R")
 ```
 
 [Back to top](#top)
 
+# 5. Outcome model
 
-## XGBoost
-
-```{python}
-#| label: xgb
-
-xgb_grid = {
-    "model__n_estimators":     [50, 100, 500, 1000],
-    "model__max_depth":        [3, 5, 7, 9],
-    "model__learning_rate":    [0.2],
-    "model__subsample":        [0.6, 0.8, 1.0],
-    "model__colsample_bytree": [0.6, 0.8, 1.0],
-    "model__gamma":            [0, 1, 5],
-    "model__min_child_weight": [1, 3, 5],
-    "model__scale_pos_weight": [scale_pos_weight],
-}
-
-if RUN_MODELS:
-    res_xgb, best_xgb = run_grid(
-        "XGBoost",
-        XGBClassifier(eval_metric="logloss", n_jobs=1, random_state=SEED),
-        xgb_grid, data, refit="roc_auc")
-    save_results(res_xgb, SAMPLE, "XG")
-    report("XGBoost", best_xgb, data)
-else:
-    res_xgb = load_latest(SAMPLE, "XG")
-
-res_xgb.query("stage == 'Test'") if res_xgb is not None else "no saved XGBoost results"
+```{r}
+# source("code/06_outcome_models.R")
 ```
 
 [Back to top](#top)
 
+# 6. G-Computation using machine learning
 
-## LightGBM
+## Posterior predictive checks
 
-```{python}
-#| label: lgbm
+```{r}
+#| label: run-08
+#| cache.extra: !expr c(file.mtime("R/08_ppc_prior.R"), file.mtime("R/jags/2pl_prior.jags"))
 
-lgbm_grid = {
-    "model__learning_rate":     [0.2],
-    "model__n_estimators":      [1000],
-    "model__num_leaves":        [31],
-    "model__max_depth":         [1, 2, 3],
-    "model__min_child_samples": [20],
-    "model__min_split_gain":    [0],
-    "model__reg_alpha":         [0],
-    "model__reg_lambda":        [0],
-    "model__subsample":         [0.8],
-    "model__colsample_bytree":  [0.8],
-    "model__subsample_freq":    [1],
-    "model__max_bin":           [255],
-    "model__boosting_type":     ["dart"],
-}
-
-if RUN_MODELS:
-    res_lgbm, best_lgbm = run_grid(
-        "LightGBM",
-        LGBMClassifier(objective="binary", metric="binary_logloss", n_jobs=1,
-                       random_state=SEED, scale_pos_weight=scale_pos_weight, verbose=-1),
-        lgbm_grid, data, refit="roc_auc")
-    save_results(res_lgbm, SAMPLE, "LGBM")
-    report("LightGBM", best_lgbm, data)
-else:
-    res_lgbm = load_latest(SAMPLE, "LGBM")
-
-res_lgbm.query("stage == 'Test'") if res_lgbm is not None else "no saved LightGBM results"
+# source("code/07_ppc_prior.R")
 ```
 
 [Back to top](#top)
 
+# 7. Figures
 
-## Deep Neural Network
-
-```{python}
-#| label: dnn
-
-if RUN_MODELS:
-    import torch
-    import torch.nn as nn
-    from skorch import NeuralNetBinaryClassifier
-    from skorch.callbacks import EarlyStopping
-
-    DEVICE = ("cuda" if torch.cuda.is_available()
-              else "mps" if torch.backends.mps.is_available()
-              else "cpu")
-    print(f"[PyTorch] {DEVICE}")
-    torch.manual_seed(SEED)
-
-    class MLP(nn.Module):
-        def __init__(self, n_features, hidden_layers=2, units=64, dropout_rate=0.2):
-            super().__init__()
-            layers, in_dim = [], n_features
-            for _ in range(hidden_layers):
-                layers += [nn.Linear(in_dim, units), nn.ReLU(), nn.Dropout(dropout_rate)]
-                in_dim = units
-            layers.append(nn.Linear(in_dim, 1))
-            self.net = nn.Sequential(*layers)
-
-        def forward(self, X):
-            return self.net(X).squeeze(-1)
-
-    net = NeuralNetBinaryClassifier(
-        module=MLP,
-        module__n_features=None,
-        criterion=nn.BCEWithLogitsLoss,
-        criterion__pos_weight=torch.tensor([scale_pos_weight], dtype=torch.float32),
-        optimizer=torch.optim.Adam,
-        max_epochs=50,
-        batch_size=256,
-        device=DEVICE,
-        train_split=None,
-        verbose=0,
-    )
-
-    n_features = preprocessor.fit_transform(data["X_train"]).shape[1]
-    net.set_params(module__n_features=n_features)
-    print(f"# of features: {n_features}")
-
-    dnn_grid = {
-        "model__module__hidden_layers": [2, 3],
-        "model__module__units":         [64, 128],
-        "model__module__dropout_rate":  [0.2, 0.5],
-        "model__lr":                    [1e-3, 1e-4],
-        "model__batch_size":            [256, 512],
-        "model__max_epochs":            [50],
-    }
-
-    res_dnn, best_dnn = run_grid(
-        "DeepNeuralNetwork", net, dnn_grid, data, refit="roc_auc")
-    save_results(res_dnn, SAMPLE, "DNN")
-    report("DNN", best_dnn, data)
-else:
-    res_dnn = load_latest(SAMPLE, "DNN")
-
-res_dnn.query("stage == 'Test'") if res_dnn is not None else "no saved DNN results"
+```{r}
+# source("code/08_main_figures.R")
+# source("code/09_figures.R")
+# source("code/10_state_map.R")
+# source("code/11_interaction.R") # By politics
+# source("code/12_ability_by_ideology.R") # By politics
 ```
 
-[Back to top](#top)
+```{r}
+#| label: fig-uptake
+#| fig-cap: "Figure 1. Association between headline detection ability and vaccine confidence, by country"
+#| fig-cap-location: top
+#| out-width: "100%"
+#| fig-align: center
+#| echo: false
 
-
-# 5. Compiling
-
-## eSupp. Model comparison
-
-```{python}
-#| label: tbl-perf
-#| tbl-cap: "Hold-out performance of the best configuration per algorithm"
-frames = [r for r in [res_rf, res_xgb, res_lgbm, res_dnn] if r is not None]
-perf = (pd.concat(frames)
-          .query("stage == 'Test'")
-          .set_index("model")
-          [["balanced_accuracy", "sensitivity", "specificity", "roc_auc", "f1"]]
-          .round(3))
-perf.to_csv(OUT / f"tbl2_perf_S{SAMPLE}.csv")
-perf
+knitr::include_graphics("output/fig_forest.svg")
 ```
 
-## Top configurations by F1
-
-```{python}
-#| label: tbl-top5
-(pd.concat(frames).query("stage == 'CV'")
-   .sort_values("f1", ascending=False)
-   .head(5)
-   .dropna(axis=1, how="all"))
-```
+::: {.fig-note}
+*Note.* Markers on the X-axis are odds ratios estimated from country-specific multilevel models, while horizontal lines indicate 95% CIs. Odds ratios are per 1 SD increase in detection score. The dashed line marks the null (odds ratio 1). Models used post-stratification weights and adjusted for sociodemographic covariates, perceived ease of access to and affordability of vaccination, and first-level administrative region. Samples comprise 11,380 respondents in the USA, 946 in the UK, and 920 in Canada.
+:::
 
 [Back to top](#top)
