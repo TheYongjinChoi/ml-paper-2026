@@ -1,13 +1,7 @@
 #!/usr/bin/env python3
-"""참여자가 렌더한 HTML을 모아 대시보드 사이트를 만든다.
+"""참여자가 렌더한 HTML을 모아 대시보드 사이트를 생성.
 
-하는 일은 셋뿐이다.
-  1. projects/*/_master.html 을 훑어 현황표(dashboard/_status.md)를 쓴다
-  2. dashboard/index.qmd 를 렌더한다  → 대시보드 첫 페이지
-  3. 결과와 참여자 HTML을 docs/ 로 모은다
-
-대시보드 내용을 바꾸고 싶으면 이 파일이 아니라 dashboard/index.qmd 와
-dashboard/dashboard.css 를 고치면 된다.
+대시보드 내용을 바꾸고 싶으면 이 파일이 아니라 dashboard/index.qmd 와 dashboard/dashboard.css 를 수정
 
 사용법:
     python3 scripts/build_site.py
@@ -23,7 +17,6 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 # ── 설정 ────────────────────────────────────────────────────────
-# 폴더 이름을 바꿨다면 여기만 고치면 된다.
 
 PAPERS_DIR = "projects"            # 참여자 폴더들이 있는 곳
 OUTPUT_DIR = "docs"                # 완성된 사이트가 놓일 곳
