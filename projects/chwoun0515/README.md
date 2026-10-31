@@ -211,3 +211,85 @@ Choo & Yoon(2026)은 서울시 골목상권의 분기별 매출 회복경로를 
 첫째, 단일 지표에 의존한 시장 진단을 보완한다. 매출이 증가하면서 순진입률이 하락하는 시장과 두 지표가 함께 개선되는 시장은 서로 다른 점검이 필요할 수 있다. 분기별 변화를 함께 관찰하면 지자체와 지원기관이 거래 규모와 점포 기반의 차이를 확인하고, 추가 현장조사가 필요한 시장을 파악하는 데 도움이 된다.
 둘째, 시장별 여건에 맞는 지원 방향을 논의할 근거를 제공한다. 이윤명 & 김태형(2018), 문형주 & 장창호(2021)가 검토한 내부·배후 특성을 바탕으로, 어떤 조건이 이후의 변화와 관련되는지 확인할 수 있다. 이는 조직·운영 지원과 수요·접근 여건의 개선 중 무엇을 우선 점검할지 판단하는 보조자료가 된다. 다만 관찰된 관련성을 특정 사업의 효과로 단정하지 않는다.
 셋째, 지속적인 모니터링과 정책 평가를 위한 자료 축적 방향을 제시한다. 허심양 & 최현정(2017)은 협력과 지속가능한 지원체계의 중요성을 제시하였다. 시장별 지원 시점·내용과 경제적 변화 자료를 연계하면 후속 평가의 기반을 마련할 수 있다. 또한 Meerow & Newell(2019)의 ‘누구를 위한 리질리언스인가’라는 질문을 고려하여, 경제지표를 지원의 자동 선정·배제 기준으로 사용하기보다 상인과 주민의 경험을 확인하는 현장 판단과 함께 활용할 필요가 있다.
+
+## References
+
+### 국외 논문
+
+Berkes, F., & Ross, H. (2013). Community resilience: Toward an integrated approach. *Society & Natural Resources, 26*(1), 5–20. https://doi.org/10.1080/08941920.2012.736605
+
+Chaskin, R. J. (2001). Building community capacity: A definitional framework and case studies from a comprehensive community initiative. *Urban Affairs Review, 36*(3), 291–323. https://doi.org/10.1177/10780870122184876
+
+Choo, M., & Yoon, D. K. (2026). Unveiling dynamic economic resilience: A commercial district-level analysis of sales recovery in Seoul, Korea. *The Annals of Regional Science, 75*, Article 32. https://doi.org/10.1007/s00168-026-01467-w
+
+Cutter, S. L., Barnes, L., Berry, M., Burton, C., Evans, E., Tate, E., & Webb, J. (2008). A place-based model for understanding community resilience to natural disasters. *Global Environmental Change, 18*(4), 598–606. https://doi.org/10.1016/j.gloenvcha.2008.07.013
+
+Frenken, K., van Oort, F. G., & Verburg, T. (2007). Related variety, unrelated variety and regional economic growth. *Regional Studies, 41*(5), 685–697. https://doi.org/10.1080/00343400601120296
+
+Glaeser, E. L., Kallal, H. D., Scheinkman, J. A., & Shleifer, A. (1992). Growth in cities. *Journal of Political Economy, 100*(6), 1126–1152. https://doi.org/10.1086/261856
+
+Ireni-Saban, L. (2013). Challenging disaster administration: Toward community-based disaster resilience. *Administration & Society, 45*(6), 651–673. https://doi.org/10.1177/0095399712438375
+
+Kim, K., Kim, S., Lee, D., & Park, C.-Y. (2023). Impacts of social distancing policy and vaccination during the COVID-19 pandemic in the Republic of Korea. *Journal of Economic Dynamics and Control, 150*, Article 104642. https://doi.org/10.1016/j.jedc.2023.104642
+
+Magis, K. (2010). Community resilience: An indicator of social sustainability. *Society & Natural Resources, 23*(5), 401–416. https://doi.org/10.1080/08941920903305674
+
+Martin, R., & Sunley, P. (2015). On the notion of regional economic resilience: Conceptualization and explanation. *Journal of Economic Geography, 15*(1), 1–42. https://doi.org/10.1093/jeg/lbu015
+
+Meerow, S., & Newell, J. P. (2019). Urban resilience for whom, what, when, where, and why? *Urban Geography, 40*(3), 309–329. https://doi.org/10.1080/02723638.2016.1206395
+
+Norris, F. H., Stevens, S. P., Pfefferbaum, B., Wyche, K. F., & Pfefferbaum, R. L. (2008). Community resilience as a metaphor, theory, set of capacities, and strategy for disaster readiness. *American Journal of Community Psychology, 41*(1–2), 127–150. https://doi.org/10.1007/s10464-007-9156-6
+
+Sampson, R. J., Raudenbush, S. W., & Earls, F. (1997). Neighborhoods and violent crime: A multilevel study of collective efficacy. *Science, 277*(5328), 918–924. https://doi.org/10.1126/science.277.5328.918
+
+Sherrieb, K., Norris, F. H., & Galea, S. (2010). Measuring capacities for community resilience. *Social Indicators Research, 99*(2), 227–247. https://doi.org/10.1007/s11205-010-9576-9
+
+Shmueli, G. (2010). To explain or to predict? *Statistical Science, 25*(3), 289–310. https://doi.org/10.1214/10-STS330
+
+Wentworth, C., Warsaw, P., Isaacs, K., Traore, A., Hammon, A., & Lewis, A. (2023). The resilience and viability of farmers markets in the United States as an alternative food network: Case studies from Michigan during the COVID-19 pandemic. *Agriculture and Human Values, 40*, 1481–1496. https://doi.org/10.1007/s10460-023-10445-3
+
+Wrigley, N., & Dolega, L. (2011). Resilience, fragility, and adaptation: New evidence on the performance of UK high streets during global economic crisis and its policy implications. *Environment and Planning A, 43*(10), 2337–2363. https://doi.org/10.1068/a44270
+
+### 국내 논문
+
+고근모. (2022). 전통시장 활성화 고찰. *전통재래시장연구, 9*(2), 1–4.
+
+김단야. (2022). 패널모형을 활용한 코로나 발생 전후 전통시장 상권매출의 변화에 관한 연구. *지역연구, 38*(4), 59–74. https://doi.org/10.22669/krsa.2022.38.4.059
+
+김민정, & 류성민. (2016). 전통시장의 활성화 방안에 대한 정성적 연구: 국내 전통 시장을 중심으로. *유통연구, 21*(4), 157–177. https://doi.org/10.17657/jcr.2016.10.31.8
+
+김원배, & 신혜원. (2013). 한국의 경제위기와 지역 탄력성. *국토연구, 79*, 3–21.
+
+박재수, & 김찬호. (2022a). 전통시장의 정책방향. *전통재래시장연구, 9*(1), 1–4.
+
+박재수, & 김찬호. (2022b). 클러스터로서 전통시장: 서울약령시. *전통재래시장연구, 9*(2), 5–16.
+
+박주형. (2013). 도구화되는 ‘공동체’: 서울시 「마을공동체 만들기 사업」에 대한 비판적 고찰. *공간과 사회, 23*(1), 4–43.
+
+유현지. (2021). 코로나19와 서울시 골목상권의 매출액 영향요인에 관한 연구. *한국지역개발학회지, 33*(3), 45–76. https://doi.org/10.22885/KRDA.2021.33.3.45
+
+이윤명, & 김태형. (2018). 서울시 전통시장 경제 활성화를 위한 시장 운영 및 입지 특성 분석: 점포당 매출액과 공실률을 중심으로. *서울도시연구, 19*(2), 105–118.
+
+이현정, 안영수, & 여관현. (2021). 서울시 전통시장 변화의 영향요인 탐색과 정책적 함의. *서울도시연구, 22*(4), 23–42. https://doi.org/10.23129/seouls.22.4.202112.23
+
+정은애, & 김영기. (2022). 상권활성화 성공 요인 분석 및 정책 방향: 18개 상권 르네상스 사업 대상지를 중심으로. *주거환경, 20*(1), 193–210. https://doi.org/10.22313/reik.2022.20.1.193
+
+정혜윤, 전보강, & 허원창. (2025). 업종 다양성과 점포 밀도가 점포 성과에 미치는 효과: 코로나19의 영향 분석을 중심으로. *지역연구, 41*(2), 51–64. https://doi.org/10.22669/krsa.2025.41.2.051
+
+주민지, 이승혁, & 강민아. (2023). 재난의 특성에 따른 지역사회 재난 리질리언스 개념 및 이론적 프레임워크의 재고찰 필요성과 시사점. *융합사회와 공공정책, 17*(3), 27–66. https://doi.org/10.37582/CSPP.2023.17.3.27
+
+하현상, 김종범, 조경호, 이석환, 최진식, & 전대욱. (2014). 지역사회 재난 리질리언스(Community Disaster Resilience) 연구의 비판적 고찰과 행정학적 제언. *지역발전연구, 23*(2), 409–464.
+
+허심양, & 최현정. (2017). 재난 후 공동체 리질리언스 촉진 개입 원칙에 관한 체계적 문헌 고찰. *Korean Journal of Clinical Psychology, 36*(2), 255–282. https://doi.org/10.15842/kjcp.2017.36.2.009
+
+### 국내 보고서
+
+문형주, & 장창호. (2021). *포스트 코로나19 시대 서울시 상권 지원·관리 방안* (작은연구 좋은서울 21-03). 서울연구원. https://www.si.re.kr/sites/default/files/작은연구%2021-03.pdf
+
+윤혜린, 남종석, & 조아영. (2022). *경남지역 전통시장 지원정책 개선방안* (현안연구 2022-09). 경남연구원.
+
+### 법령
+
+유통산업발전법 시행령, 대통령령 제35939호 (2025. 12. 23., 타법개정). https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=280595&efYd=20251223
+
+전통시장 및 상점가 육성을 위한 특별법 시행령 제2조, 대통령령 제36415호 (2026. 6. 16., 일부개정). https://www.law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1028634449
