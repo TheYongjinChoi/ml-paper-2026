@@ -1,6 +1,7 @@
 ---
-title: "프로젝트명""
-author: ""
+title: "코로나19 장기화의 서울시 전통시장 영향 분석"
+subtitle: "지역사회 리질리언스 관점을 중심으로"
+author: "원치현(국민대학교 행정학과)"
 date: today
 format:
   html:
@@ -21,7 +22,7 @@ execute:
 ```{r}
 #| label: setup
 
-source("code/initial.R")
+source("C:/Users/chwou/Desktop/graduate/04_analysis/workspace/ml-paper-2026/projects/chwoun0515/code/initial.R")
 ```
 
 [Back to top](#top)
@@ -32,7 +33,7 @@ source("code/initial.R")
 ```{r}
 #| label: data-prep
 
-source("code/01_data.R")
+source("C:/Users/chwou/Desktop/graduate/04_analysis/workspace/ml-paper-2026/projects/chwoun0515/code/data.R")
 ```
 
 [Back to top](#top)
@@ -55,7 +56,7 @@ source("code/01_data.R")
 ```{r}
 #| label: descriptive
 
-
+source("C:/Users/chwou/Desktop/graduate/04_analysis/workspace/ml-paper-2026/projects/chwoun0515/code/reproduce_descriptive.R")
 ```
 
 [Back to top](#top)

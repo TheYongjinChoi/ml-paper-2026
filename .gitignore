@@ -18,6 +18,8 @@ projects/*/_master_cache/
 .RData
 .Ruserdata
 *.Rproj
+projects/*/*.rds
+*.rds
 
 # 시스템 파일
 .DS_Store

@@ -1,0 +1,43 @@
+model {
+  # 2PL IRT model (Two-parameter logistic IRT model)
+  #
+  # Y[i, j]  = 1 if person i answered item j correctly, 0 otherwise
+  # theta[i] = latent ability of person i
+  # a[j]     = discrimination of item j (constrained positive)
+  # b[j]     = difficulty of item j
+  #
+  # Note to Yongjin: JAGS parameterises dnorm() with precision NOT variance.
+
+  # Likelihood (2PL-IRT)
+  for (i in 1:N) {
+    for (j in 1:J) {
+      logit(p[i, j]) <- a[j] * (theta[i] - b[j])
+      Y[i, j] ~ dbern(p[i, j])
+    }
+  }
+
+  # Priors on ability
+  for (i in 1:N) {
+    theta[i] ~ dnorm(0, 1)  # This can be extended to include predictors of theta
+  }
+
+  # Priors on item parameters
+  for (j in 1:J) {
+    a[j] ~ dlnorm(0, 1)        # log-normal keeps discrimination > 0
+    b[j] ~ dnorm(0, 0.25)      # difficulty, precision 0.25 => SD = 2
+  }
+  
+  # One thing we can do when predicting caregiver-reported coverage / uptake is to 
+  # embed the above in a likelihood for child-level vaccine coverage 
+  # (e.g. MCV completion) to fully propagate uncertainty in latent ability. 
+  # E.g., something like the below
+  # Y_mcv[i] ~ dbern(mu[i]) 
+  # logit(mu[i]) <- alpha + beta * theta[i] + inprod(gamma * covariates[i, ])
+  # logit(mu[i]) <- alpha + beta * theta[i] 
+  #                       + gamma * politics[i] 
+  #                       + delta * theta[i] * politics[i]
+  #                       + inprod(kappa * covariates[i, ])
+  # ... where covariates[i, ] is a vector of individual-level 
+  # covariates that contains possible confounders, e.g. access, confidence or 
+  # exposures (political views)... 
+}
