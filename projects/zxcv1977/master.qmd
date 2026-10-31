@@ -1,0 +1,99 @@
+---
+title: "서울사랑상품권 결제정보를 활용한 결제 패턴 분석 및 예측 모델링"
+author: "유하영"
+date: today
+format:
+  html:
+    embed-resources: true
+    toc: true
+    toc-depth: 3
+    code-fold: true
+    theme: paper
+execute:
+  echo: true
+  warning: false
+---
+# setting
+# dir.create("code", showWarnings = FALSE)
+# file.create("code/initial.R")
+
+getwd()
+setwd("C:/Users/jw_5202/Desktop/ml-paper-2026/projects/zxcv1977")
+
+# 1. Initial setting
+
+## Loading packages
+
+```{r}
+#| label: setup
+
+source("code/initial.R")
+```
+
+[Back to top](#top)
+
+# 데이터 구조/결측치 확인
+# file.create("code/01_data.R")
+
+# 2. Data preparation
+
+```{r}
+#| label: data-prep
+
+source("code/01_data.R")
+```
+
+[Back to top](#top)
+
+
+## Data exclusion and split
+
+```{r}
+#| label: split
+
+```
+
+[Back to top](#top)
+
+
+# 3. Data review
+
+## Descriptive statistics
+
+```{r}
+#| label: descriptive
+
+
+```
+
+[Back to top](#top)
+
+
+# 4. Estimation
+
+```{r}
+#| label: estimation
+
+
+```
+
+[Back to top](#top)
+
+
+# 5. Vizualization
+
+## Figure 1. xxx
+
+```{r}
+#| label: fig1
+
+```
+
+## Figure 2. xxx
+
+```{r}
+#| label: fig2
+
+```
+
+[Back to top](#top)
