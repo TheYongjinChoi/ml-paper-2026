@@ -27,43 +27,41 @@ setwd("C:/Users/jw_5202/Desktop/ml-paper-2026/projects/zxcv1977")
 ```{r}
 #| label: setup
 
-source("code/initial.R")
+source("code/0_initial.R")
 ```
 
 [Back to top](#top)
 
 # 데이터 구조/결측치 확인
-# file.create("code/01_data.R")
-
-# 2. Data preparation
+# file.create("code/1_data.R")
 
 ```{r}
-#| label: data-prep
+#| label: data-prep (1)
 
-source("code/01_data.R")
+source("code/1_data.R")
+```
+
+[Back to top](#top)
+
+# 데이터 전처리
+# file.create("code/2_data.R")
+
+```{r}
+#| label: data-prep (2)
+
+source("code/2_data.R")
 ```
 
 [Back to top](#top)
 
 
-## Data exclusion and split
+# 교차분석
+# file.create("code/3_data.R")
 
 ```{r}
-#| label: split
+#| label: data-prep (2)
 
-```
-
-[Back to top](#top)
-
-
-# 3. Data review
-
-## Descriptive statistics
-
-```{r}
-#| label: descriptive
-
-
+source("code/3_data.R")
 ```
 
 [Back to top](#top)

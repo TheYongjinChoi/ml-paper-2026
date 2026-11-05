@@ -1,0 +1,14 @@
+﻿데이터셋,변수명,자료형,결측치수,결측치비율
+purchase,상품권명,factor,0,0
+purchase,상품권ID,integer64,0,0
+purchase,상품권번호,integer64,0,0
+purchase,만료일자,integer,0,0
+purchase,구매일시,integer64,0,0
+purchase,구매금액(액면가),integer,0,0
+purchase,할인율,integer,0,0
+purchase,구매자성별,factor,0,0
+purchase,구매자생년월일,integer,0,0
+purchase,구매일자,IDate/Date,0,0
+purchase,구매연도,integer,0,0
+purchase,구매월,ordered/factor,0,0
+purchase,구매연월,character,0,0

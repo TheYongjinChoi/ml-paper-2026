@@ -9,27 +9,16 @@ setwd("C:/Users/jw_5202/Desktop/ml-paper-2026/projects/zxcv1977/data")
 # 2. 데이터 불러오기
 # ==========================================
 
-# readr 패키지 불러오기
+# 패키지 불러오기
 library(readr)
+library(data.table)
 
-# 결제 데이터 인코딩 확인
-guess_encoding(
-  "2025_결제_통합.csv"
-)
+# 1. 시스템의 모든 코어/스레드를 활용하도록 설정
+setDTthreads(0)
 
-# 결제 데이터
-payment <- read.csv(
-  "2025_결제_통합.csv",
-  fileEncoding = "UTF-8",
-  check.names = FALSE
-)
-
-# 구매 데이터
-purchase <- read.csv(
-  "2025_구매_통합.csv",
-  fileEncoding = "UTF-8",
-  check.names = FALSE
-)
+# 2. UTF-8 인코딩을 지정하여 대용량 파일 빠르게 불러오기
+payment <- fread("2025_결제_통합.csv", encoding = "UTF-8", nThread = getDTthreads())
+purchase <- fread("2025_구매_통합.csv", encoding = "UTF-8", nThread = getDTthreads())
 
 # ==========================================
 # 3. 데이터 확인
