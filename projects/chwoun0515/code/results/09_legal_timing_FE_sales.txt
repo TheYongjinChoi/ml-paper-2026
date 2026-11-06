@@ -1,0 +1,15 @@
+OLS estimation, Dep. Var.: sales_yoy_log
+Observations: 1,566
+Fixed-effects: code: 108,  period: 16
+Standard-errors: Clustered (code) 
+                     Estimate Std. Error   t value Pr(>|t|)    
+post_first_support   9.889686   5.389644  1.834942 0.069292 .  
+x_entropy_sales     11.582773  36.323730  0.318876 0.750442    
+x_stores_sales     -48.700973  58.120477 -0.837931 0.403937    
+x_operating_sales    0.033798   0.340533  0.099251 0.921125    
+x_foot_sales       -14.412668   7.635393 -1.887613 0.061787 .  
+x_resident_sales     5.817234   3.716312  1.565325 0.120460    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+RMSE: 30.1     Adj. R2: 0.193191
+             Within R2: 0.01437 

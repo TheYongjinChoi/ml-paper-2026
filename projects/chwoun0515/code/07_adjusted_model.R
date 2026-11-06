@@ -27,7 +27,8 @@ run_adjusted <- function(outcome, predictors, label) {
 sales_adjusted <- run_adjusted("sales_yoy_log", sales_x, "sales")
 entry_adjusted <- run_adjusted("net_entry_rate", entry_x, "entry")
 
-# 제3장의 조직 유무 × 지원중 보조가설은 비교 가능한 지원 사례가 있을 때만 검토합니다.
+# 조직이 지원사업의 신청 요건인 경우, 조직 없음 × 지원중 조합의 부재는
+# 자료 결함이 아니라 자격요건에서 비롯될 수 있습니다. 이 표는 그 구조를 확인합니다.
 overlap <- analysis_data |>
   dplyr::filter(year >= 2022, !is.na(organization_presence_2020_0_1)) |>
   dplyr::count(organization_presence_2020_0_1, x_support_sales,
@@ -36,5 +37,5 @@ print(overlap)
 readr::write_csv(overlap, file.path(result_dir, "07_organization_support_overlap.csv"))
 if (!all(c(0, 1) %in% overlap$x_support_sales[
     overlap$organization_presence_2020_0_1 == 0])) {
-  cat("조직 없음 시장에서 지원중/비지원중 비교가 불가능하여 상호작용 계수는 추정하지 않습니다.\n")
+  cat("조직 없음 시장의 전년도 지원중 사례가 없어 조직 유무 × 지원중 상호작용을 추정하지 않습니다. 사업 자격요건과 조직 형성 시점을 함께 해석하세요.\n")
 }

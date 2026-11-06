@@ -1,0 +1,306 @@
+code,name,organization_type_2020,organization_presence_2020_0_1,first_observed_support_year,observed_support_years,organization_group_2020,first_support_label
+3130001,통인시장,법적단체,1,2022,4,legal,2022
+3130002,세종마을음식문화거리(금천교시장),NA,NA,2021,3,unmatched,2021
+3130004,낙원시장(낙원지하시장(대일상가)),NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130005,세운상가가동,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130007,광장시장(광장전통시장),법적단체,1,NA,0,legal,not_observed_2021_2025
+3130009,마전교지하쇼핑센터(구 한일상가),임의단체,1,NA,0,informal,not_observed_2021_2025
+3130010,종로신진시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130011,충신시장,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130012,"동대문종합시장(동대문종합시장 신관, 동대문종합시장D동상가)",NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130013,동대문상가A동,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130014,동문시장,임의단체,1,NA,0,informal,not_observed_2021_2025
+3130015,창신골목시장,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130016,동대문상가B동,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130017,동대문상가C동,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130018,동대문문구완구거리(동대문문구완구시장),NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130019,동대문상가D동,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130020,동묘시장(동묘벼룩시장),NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130021,신설종합시장,임의단체,1,NA,0,informal,not_observed_2021_2025
+3130022,숭례문수입상가(남대문시장),법적단체,1,NA,0,legal,not_observed_2021_2025
+3130024,남대문시장(자유상가),법적단체,1,NA,0,legal,not_observed_2021_2025
+3130025,삼익패션타운(남대문시장),법적단체,1,NA,0,legal,not_observed_2021_2025
+3130031,청계천공구상가,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130032,인현시장,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130033,대림상가(청계상가),NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130034,필동 골목형상점가,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130035,방산종합시장(방산시장),NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130036,중부시장(신중부시장),NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130038,"평화시장(통일상가, 동화상가)",NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130042,약수시장,임의단체,1,NA,0,informal,not_observed_2021_2025
+3130046,team204(팀204),법적단체,1,NA,0,legal,not_observed_2021_2025
+3130047,테크노상가(엘리시움),NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130048,동평화시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130049,신당 미래유산 먹거리 골목형상점가,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130050,청평화시장,임의단체,1,NA,0,informal,not_observed_2021_2025
+3130051,동화동 골목형상점가,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130052,서울중앙시장(신중앙시장),법적단체,1,NA,0,legal,not_observed_2021_2025
+3130053,백학시장,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130054,황학동주방가구거리상점가,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130055,"황학시장(서울중앙시장, 신중앙시장)",법적단체,1,NA,0,legal,not_observed_2021_2025
+3130056,용산용문시장,법적단체,1,2021,4,legal,2021
+3130057,만리시장,임의단체,1,NA,0,informal,not_observed_2021_2025
+3130058,이촌종합시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130059,후암시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130060,신흥시장,법적단체,1,2025,1,legal,2025
+3130061,이태원시장,임의단체,1,NA,0,informal,not_observed_2021_2025
+3130062,보광시장,임의단체,1,NA,0,informal,not_observed_2021_2025
+3130063,신금호역 골목형상점가,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130064,금남시장,법적단체,1,2025,1,legal,2025
+3130065,무학봉상점가,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130066,행당시장상점가,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130067,왕십리도선동상점가,NA,NA,2025,1,unmatched,2025
+3130068,마장축산물시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130069,"한양대앞상점가(한양시장, 왕십리맛골목)",NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130070,뚝섬역상점가,NA,NA,2024,2,unmatched,2024
+3130071,성수역 골목형상점가,NA,NA,2024,2,unmatched,2024
+3130072,성동용답상가시장,임의단체,1,2024,2,informal,2024
+3130073,뚝도시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130074,영동교골목시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130075,노룬산시장(노룬산골목시장),NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130076,능동로골목시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130077,조양시장,임의단체,1,NA,0,informal,not_observed_2021_2025
+3130078,화양제일골목시장,법적단체,1,2022,1,legal,2022
+3130079,한아름시장,NA,0,NA,0,no_recorded_group,not_observed_2021_2025
+3130080,자양종합시장(기능상실),NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130081,자양골목전통시장(자양골목시장),법적단체,1,2022,2,legal,2022
+3130082,면곡골목시장,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130083,"중곡제일시장(중곡제일골목시장, 광성시장)",NA,NA,2022,2,unmatched,2022
+3130084,신성시장(신성골목시장),임의단체,1,NA,0,informal,not_observed_2021_2025
+3130085,용두시장,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130086,서울약령시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130087,경동광성상가(경동시장),법적단체,1,NA,0,legal,not_observed_2021_2025
+3130088,경동시장,법적단체,1,2023,3,legal,2023
+3130089,청량리수산시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130090,청량리종합시장,법적단체,1,2023,3,legal,2023
+3130091,청량종합도매시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130092,청량리농수산물시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130093,동서시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130094,청량리청과물시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130095,청량리전통시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130096,동부시장,임의단체,1,NA,0,informal,not_observed_2021_2025
+3130097,답십리 건축자재시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130098,회기시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130099,전농로터리시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130100,답십리시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130101,답십리현대시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130102,이문제일시장,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130103,이경시장,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130104,전곡시장,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130105,장미제일시장(중화동제일시장),법적단체,1,2024,1,legal,2024
+3130106,중랑동부시장,NA,NA,2023,2,unmatched,2023
+3130107,중랑동부시장(중랑교종합상가),NA,0,NA,0,no_recorded_group,not_observed_2021_2025
+3130108,태능엔터피아(태릉시장),NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130109,묵1동도깨비시장,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130110,면목골목시장(면목시장),NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130111,"동원전통종합시장(동원시장, 동원전통시장 상점가)",NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130112,사가정시장,법적단체,1,2025,1,legal,2025
+3130113,신아타운,임의단체,1,NA,0,informal,not_observed_2021_2025
+3130114,유영시장,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130115,우림골목시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130116,동성타워프라자,임의단체,1,NA,0,informal,not_observed_2021_2025
+3130117,정릉시장,법적단체,1,2021,3,legal,2021
+3130118,정릉골 골목형상점가,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130119,정릉아리랑시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130120,돈암시장(돈암제일시장),임의단체,1,NA,0,informal,not_observed_2021_2025
+3130121,길음시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130122,밤나무골시장,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130123,꿈의숲 장곡 골목형상점가,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130124,번동시장,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130125,장위전통시장,법적단체,1,2025,1,legal,2025
+3130126,새석관시장,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130127,석관시장,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130128,돌곶이시장(석관황금시장),법적단체,1,NA,0,legal,not_observed_2021_2025
+3130129,장미원골목시장,법적단체,1,2024,2,legal,2024
+3130130,수유북부골목시장,임의단체,1,NA,0,informal,not_observed_2021_2025
+3130131,동북프라자,임의단체,1,NA,0,informal,not_observed_2021_2025
+3130132,삼양골목시장(삼양시장),NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130133,우이골목시장(우이시장),NA,0,NA,0,no_recorded_group,not_observed_2021_2025
+3130134,"솔샘시장(미아6,7동골목시장)",NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130135,수유중앙골목시장(수유중앙시장),NA,0,NA,0,no_recorded_group,not_observed_2021_2025
+3130136,수유재래시장,법적단체,1,2024,2,legal,2024
+3130137,"수유전통시장(수유시장, 수유골목시장)",법적단체,1,2022,2,legal,2022
+3130138,수유프라자,임의단체,1,NA,0,informal,not_observed_2021_2025
+3130139,강북종합전통시장(강북종합골목시장),NA,NA,2022,2,unmatched,2022
+3130140,숭인시장,NA,0,NA,0,no_recorded_group,not_observed_2021_2025
+3130141,강북북부골목시장,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130142,강북북부시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130143,방천골목시장,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130144,백운시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130145,쌍문역둘리상점가,NA,NA,2024,2,unmatched,2024
+3130146,쌍문시장(쌍문역골목시장),법적단체,1,NA,0,legal,not_observed_2021_2025
+3130147,쌍문역동측상점가,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130148,방학동도깨비시장,법적단체,1,2023,2,legal,2023
+3130149,창동신창시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130150,창동골목시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130151,신도봉시장,임의단체,1,NA,0,informal,not_observed_2021_2025
+3130152,오!도봉거리 상점가,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130153,창동역상점가,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130154,상계주공1단지(가)상가,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130155,시영B상가(중계 그린아파트 B 상가),NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130156,시영2단지 무지개종합상가(중계 무지개2단지아파트상가),NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130157,상계중앙시장,법적단체,1,2023,2,legal,2023
+3130158,상계역전종합상가,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130159,공릉동 도깨비시장,법적단체,1,2021,3,legal,2021
+3130160,수일시장,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130161,증산종합시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130162,증산골목시장,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130163,응암오거리상점가,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130164,역촌중앙시장,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130165,"대림골목시장(대림시장, 양지시장)",NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130166,응암시장(신응암시장),법적단체,1,NA,0,legal,not_observed_2021_2025
+3130167,연신내상점가(연빛거리),NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130168,연서시장,법적단체,1,2021,3,legal,2021
+3130169,대조시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130170,제일시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130171,불광먹자골목 골목형상점가,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130172,모래내시장(서중시장),NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130173,백련시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130174,연희사러가,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130175,신촌 상인회(신촌상점가),NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130176,유진상가,법적단체,1,2025,1,legal,2025
+3130177,인왕시장(홍제골목형상점가),임의단체,1,NA,0,informal,not_observed_2021_2025
+3130178,이대 앞 스타트업 상점가,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130179,"이화여대 3,5,7길 상점가",NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130180,포방터시장,법적단체,1,2022,3,legal,2022
+3130181,아현가구거리상점가,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130182,영천시장,법적단체,1,2022,4,legal,2022
+3130183,상암동상점가,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130184,마포농수산물시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130185,망원월드컵시장,법적단체,1,2021,1,legal,2021
+3130186,망원시장,법적단체,1,2024,2,legal,2024
+3130187,영진시장,임의단체,1,NA,0,informal,not_observed_2021_2025
+3130188,합정시장,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130189,서교시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130190,홍대소상공인상점가,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130191,홍대 걷고싶은 거리,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130192,동진시장,임의단체,1,NA,0,informal,not_observed_2021_2025
+3130193,신수시장,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130194,용강동 상점가,NA,NA,2024,2,unmatched,2024
+3130195,도화동 상점가,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130196,공덕시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130197,마포시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130198,아현시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130199,신월3동 골목시장,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130200,"신월7동 골목시장(약수시장, 우성상가)",임의단체,1,NA,0,informal,not_observed_2021_2025
+3130201,월정로시장,NA,0,NA,0,no_recorded_group,not_observed_2021_2025
+3130202,신영시장,법적단체,1,2021,5,legal,2021
+3130203,서서울 골목형상점가,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130204,경창시장,임의단체,1,2023,2,informal,2023
+3130205,신곡종합시장(신월6동 골목시장),임의단체,1,NA,0,informal,not_observed_2021_2025
+3130206,신정3동 골목시장,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130207,신정1동 골목시장(신정제일시장),NA,0,NA,0,no_recorded_group,not_observed_2021_2025
+3130208,목동깨비시장(목3동시장),법적단체,1,2024,2,legal,2024
+3130209,목사랑시장(목4동시장),법적단체,1,2021,2,legal,2021
+3130210,목2동시장,NA,0,NA,0,no_recorded_group,not_observed_2021_2025
+3130211,신정2동 골목시장(오목교중앙시장),NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130212,공항시장,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130213,방신전통시장,법적단체,1,2023,2,legal,2023
+3130214,송화벽화시장(송화골목시장),NA,NA,2025,1,unmatched,2025
+3130215,대원종합시장,NA,0,NA,0,no_recorded_group,not_observed_2021_2025
+3130216,화곡중앙시장,법적단체,1,2021,3,legal,2021
+3130217,화곡본동시장,법적단체,1,2023,2,legal,2023
+3130218,신월중앙시장,임의단체,1,NA,0,informal,not_observed_2021_2025
+3130219,까치산시장,법적단체,1,2024,2,legal,2024
+3130220,등마루시장,NA,0,NA,0,no_recorded_group,not_observed_2021_2025
+3130221,"남부골목시장(남부화곡시장, 남부시장)",NA,NA,2025,1,unmatched,2025
+3130222,오류시장,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130223,고척근린시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130224,개봉프라자(고척근린시장),NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130225,개봉중앙시장,NA,0,2025,1,no_recorded_group,2025
+3130226,고척프라자,임의단체,1,NA,0,informal,not_observed_2021_2025
+3130227,고척골목시장상점가(그라운드 고척),법적단체,1,NA,0,legal,not_observed_2021_2025
+3130228,구로시장,법적단체,1,2021,2,legal,2021
+3130229,남구로시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130230,가리봉시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130231,독산동 우시장,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130232,독산동 맛나는거리상점가(독산동 맛나는거리),NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130233,남문시장,법적단체,1,2022,2,legal,2022
+3130234,푸른터시장(기능상실),NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130235,대명여울빛거리시장(대명시장),NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130236,비단길현대시장(현대시장),법적단체,1,NA,0,legal,not_observed_2021_2025
+3130237,박미시장(기능상실),NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130238,은행나무시장,법적단체,1,2023,2,legal,2023
+3130239,양남시장,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130240,영등포유통상가,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130241,선유도역 골목형상점가,NA,NA,2025,1,unmatched,2025
+3130242,대림중앙 골목형상점가,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130243,도림시장,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130244,대림중앙시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130245,영일시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130246,영등포청과시장(조광시장),NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130247,우리시장,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130248,영등포역지하도상점가,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130249,동남상가,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130250,삼구시장(로타리상가),법적단체,1,NA,0,legal,not_observed_2021_2025
+3130253,영신상가(제일상가),법적단체,1,NA,0,legal,not_observed_2021_2025
+3130254,남서울상가,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130255,영등포전통시장,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130256,신동시장,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130257,영등포시장기계공구상가,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130258,영진시장A동,임의단체,1,NA,0,informal,not_observed_2021_2025
+3130259,대신시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130260,신대방1동골목상권,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130261,성대전통시장(성대시장),NA,NA,2022,2,unmatched,2022
+3130262,상도도깨비 골목형상점가,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130263,신노량진시장(기능상실),NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130264,상도약수골목형상점가,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130265,노량진중앙시장,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130266,만양로상점가,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130267,본동인정시장(기능상실),NA,0,NA,0,no_recorded_group,not_observed_2021_2025
+3130268,상도전통시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130269,강남시장(동작구 강남시장),법적단체,1,NA,0,legal,not_observed_2021_2025
+3130270,흑석시장,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130271,남성역골목시장,법적단체,1,2023,3,legal,2023
+3130272,사당시장,NA,0,NA,0,no_recorded_group,not_observed_2021_2025
+3130273,남성사계시장(남성시장),법적단체,1,2021,1,legal,2021
+3130274,사당1동먹자골목상점가(사당1동먹자골목),NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130275,강남골목시장,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130276,신림중앙시장(조원동 펭귄시장),법적단체,1,NA,0,legal,not_observed_2021_2025
+3130277,조원동 펭귄시장(신림중앙시장),법적단체,1,NA,0,legal,not_observed_2021_2025
+3130278,미성동 도깨비시장 골목형상점가,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130279,관악신사시장,법적단체,1,2023,2,legal,2023
+3130280,신림종합시장,NA,0,NA,0,no_recorded_group,not_observed_2021_2025
+3130281,우림시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130282,난곡 골목형상점가,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130283,신원시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130284,관악종합시장(신원시장),법적단체,1,NA,0,legal,not_observed_2021_2025
+3130285,서원동상점가,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130286,신신림시장(삼성동시장),NA,0,NA,0,no_recorded_group,not_observed_2021_2025
+3130287,삼성동 시장(삼성동시장),NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130288,신림현대종합상가,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130289,봉일시장,NA,0,NA,0,no_recorded_group,not_observed_2021_2025
+3130290,영림시장,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130291,봉천제일종합시장,법적단체,1,2023,1,legal,2023
+3130292,봉천현대시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130293,봉천중앙시장,임의단체,1,NA,0,informal,not_observed_2021_2025
+3130294,관악중부시장,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130295,인헌시장(원당종합시장),법적단체,1,2022,3,legal,2022
+3130296,남부종합시장,임의단체,1,NA,0,informal,not_observed_2021_2025
+3130301,양재시장,NA,0,NA,0,no_recorded_group,not_observed_2021_2025
+3130302,강남시장(강남구 강남시장),임의단체,1,NA,0,informal,not_observed_2021_2025
+3130303,영동전통시장,법적단체,1,2025,1,legal,2025
+3130304,신사상가,NA,0,NA,0,no_recorded_group,not_observed_2021_2025
+3130305,논현종합시장,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130306,강남언주로,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130307,도곡시장,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130308,청담삼익시장,임의단체,1,NA,0,informal,not_observed_2021_2025
+3130309,은마종합상점가,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130310,강남개포시장,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130311,새마을시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130312,석촌시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130313,방이시장,법적단체,1,2025,1,legal,2025
+3130314,풍납시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130315,문정동 로데오거리 상점가(문정동 로데오거리),NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130316,마천시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130317,마천중앙시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130318,로데오거리상점가,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130319,성내전통시장,법적단체,1,2023,2,legal,2023
+3130320,암사종합시장,법적단체,1,2022,2,legal,2022
+3130321,장신구 특화거리 상점가,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130322,고분다리전통시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130323,둔촌역전통시장,법적단체,1,NA,0,legal,not_observed_2021_2025
+3130324,길동복조리시장,법적단체,1,2023,2,legal,2023
+3130325,명일전통시장,법적단체,1,2023,2,legal,2023
+3130326,고덕 골목형상점가,NA,NA,NA,0,unmatched,not_observed_2021_2025
+3130327,"평화시장(남평화시장, 제일평화시장, 신평화패션타운)",NA,NA,NA,0,unmatched,not_observed_2021_2025

@@ -23,12 +23,13 @@ execute:
 ```{r}
 #| label: run-analysis
 #| include: false
-# 이 문서를 렌더링하면 8개 스크립트의 결과를 최신 패널 기준으로 다시 만듭니다.
+# 이 문서를 렌더링하면 분석 스크립트의 결과를 최신 패널 기준으로 다시 만듭니다.
 code_dir <- "C:/Users/chwou/Desktop/graduate/04_analysis/workspace/ml-paper-2026/projects/chwoun0515/code"
 script_names <- c("02_descriptive_analysis.R", "03_CRE.R",
                   "04_Random_Forest_classification.R",
                   "05_Random_Forest_regression.R", "06_robustness.R",
-                  "07_adjusted_model.R", "08_visualization.R")
+                  "07_adjusted_model.R", "08_visualization.R",
+                  "09_organization_support_timing.R")
 for (script_name in script_names) {
   invisible(capture.output(
     source(file.path(code_dir, script_name), local = knitr::knit_global())
@@ -46,6 +47,17 @@ overlap <- read_result("07_organization_support_overlap.csv")
 org_counts <- read_result("02_organization_2020.csv")
 support_counts <- read_result("02_support_by_year.csv")
 missing <- read_result("02_missingness.csv")
+timing <- read_result("09_timing_by_organization.csv")
+before_after <- read_result("09_before_after_summary.csv")
+timing_fe <- read_result("09_legal_timing_FE_coefficients.csv")
+legal_n <- sum(timing$markets[timing$organization_group_2020 == "legal"])
+informal_n <- sum(timing$markets[timing$organization_group_2020 == "informal"])
+legal_early_n <- sum(timing$markets[timing$organization_group_2020 == "legal" &
+  timing$first_support_label %in% c("2021", "2022")])
+informal_early_n <- sum(timing$markets[timing$organization_group_2020 == "informal" &
+  timing$first_support_label %in% c("2021", "2022")])
+informal_supported_n <- sum(timing$markets[timing$organization_group_2020 == "informal" &
+  timing$first_support_label != "not_observed_2021_2025"])
 market_n <- dplyr::n_distinct(analysis_data$code)
 row_n <- nrow(analysis_data)
 sales_n <- sum(!is.na(analysis_data$sales_yoy_log))
@@ -211,19 +223,77 @@ robust_key <- robust |>
 knitr::kable(robust_key, caption = "결과 정의·표본 변화에 따른 핵심 계수")
 ```
 
-이전 지원 이력을 추가한 조정 모형은 `results/07_adjusted_sales.txt`와 `results/07_adjusted_entry.txt`에 저장됩니다. 2020년 조직 없음 시장에는 전년도 지원중 사례가 없어 조직 유무 × 지원중 상호작용은 현재 자료로 추정하지 않습니다.
+이전 지원 이력을 추가한 조정 모형은 `results/07_adjusted_sales.txt`와 `results/07_adjusted_entry.txt`에 저장됩니다. 2020년에 조직이 없었던 시장에서는 분석에 사용한 전년도 지원중 사례가 없어 조직 유무 × 지원중 상호작용은 추정하지 않습니다. 지원사업이 조직을 신청 요건으로 삼는다면 이는 제도적 선택의 결과일 수 있습니다.
 
 ```{r}
 #| label: overlap-table
 knitr::kable(overlap, caption = "조직 유무별 전년도 지원중 관측치")
 ```
 
-## 6. 파일럿에서 확인된 과제
+## 6. 초기 조직 형태와 지원 시작 시점
+
+다음 표의 **최초 지원연도**는 2021–2025년 제공 자료에서 `지원중`이 처음 관찰된 연도입니다. 2021년은 관찰 시작 전부터 진행된 사업일 수 있으므로 실제 첫 수혜연도로 단정하지 않습니다. 조직 형태는 **2020년 4분기**, 지원 상태는 **그 이후**를 나타냅니다. 임의단체가 나중에 법적단체로 바뀌거나 새 조직이 설립될 수 있습니다.
+
+```{r}
+#| label: organization-support-timing
+timing_view <- timing |>
+  dplyr::mutate(
+    organization_group_2020 = dplyr::recode(organization_group_2020,
+      legal = "법적단체", informal = "임의단체",
+      no_recorded_group = "조직 없음(자료상)", unmatched = "조직 미확인"),
+    first_support_label = ifelse(first_support_label == "not_observed_2021_2025",
+                                 "2021–2025 지원중 미관찰", first_support_label)) |>
+  dplyr::rename(`2020년 조직 형태` = organization_group_2020,
+                `최초 관찰 지원연도` = first_support_label,
+                `시장 수` = markets)
+knitr::kable(timing_view, caption = "2020년 조직 형태별 첫 지원중 기록")
+```
+
+법적단체 `r legal_n`개 시장 중 2021–2022년에 지원중이 처음 관찰된 시장은 `r legal_early_n`개입니다. 임의단체 `r informal_n`개 시장 중 같은 기간에 처음 관찰된 시장은 `r informal_early_n`개입니다. 이는 조직 형태와 지원 시점의 **기술적 관계**이며, 신청 자격과 선정 기준을 통제한 결과가 아닙니다. 임의단체의 지원중 관찰 시장은 총 `r informal_supported_n`개이므로 조직 형태별 지원 후 경제적 변화를 안정적으로 비교할 수 없습니다.
+
+지원 시작 연도에는 실제 사업 개시 분기를 알 수 없어 아래 전후 비교에서 제외했습니다. 시작 **전년도와 다음 연도**의 평균을 같은 시장 안에서 비교합니다. 2022년 시작 시장의 매출은 2021년 전년 동기 비교값이 없어 계산되지 않고, 2025년 시작 시장의 다음 연도 결과는 현재 패널 밖입니다. 다음 표는 공통 경기 변화와 사업 선정 요인을 분리하지 않은 기술통계입니다.
+
+```{r}
+#| label: organization-support-before-after
+before_after_view <- before_after |>
+  dplyr::mutate(organization_group_2020 = dplyr::recode(organization_group_2020,
+    legal = "법적단체", informal = "임의단체",
+    no_recorded_group = "조직 없음(자료상)", unmatched = "조직 미확인")) |>
+  dplyr::rename(`2020년 조직 형태` = organization_group_2020,
+                `첫 지원중 연도` = first_observed_support_year,
+                `시장 수` = markets,
+                `매출 비교 가능 시장` = markets_with_sales_pair,
+                `매출 변화 차이` = mean_sales_change,
+                `순진입 비교 가능 시장` = markets_with_entry_pair,
+                `순진입률 차이` = mean_entry_change)
+knitr::kable(before_after_view, digits = 2,
+             caption = "지원 시작 전년도와 다음 연도의 평균 차이(후−전)")
+```
+
+법적단체 시장만 대상으로 지원 개시 연도를 제외하고, **첫 지원 관찰 다음 연도 이후**를 표시한 보조 고정효과 모형도 계산했습니다. 시장 고정효과, 공통 분기효과와 선행 시장 특성을 고려합니다. 2021년에 이미 지원중이었던 시장은 실제 시작 시점을 알 수 없어 제외했습니다. 이 계수는 지원 선정 요인, 조직 활동의 변화, 지원 효과의 시장별·시기별 차이를 분리하지 못하므로 **조건부 관련성**으로만 읽습니다.
+
+```{r}
+#| label: organization-support-fe
+timing_fe_view <- timing_fe |>
+  dplyr::filter(variable == "post_first_support") |>
+  dplyr::transmute(
+    `결과변수` = ifelse(outcome == "sales_yoy_log", "매출 전년 동기 변화", "점포 순진입률"),
+    `계수` = round(Estimate, 2),
+    `시장 군집 표준오차` = round(`Std. Error`, 2),
+    `관측치` = n,
+    `분석 시장` = markets,
+    `지원 후 관측 시장` = treated_markets)
+knitr::kable(timing_fe_view,
+             caption = "법적단체 시장의 첫 지원 관찰 다음 연도 이후: 보조 FE 분석")
+```
+
+## 7. 파일럿에서 확인된 과제
 
 1. **자료 정의 확인:** 매출 원천 열의 집계기간, 업종 코드의 의미와 시장 경계를 원자료 정의서에 대조해야 합니다.
 2. **조직 자료 보강:** 2020년 조직 유무가 미확인인 시장을 추가 확인해야 CRE의 시장 간 비교가 안정됩니다.
 3. **지원사업 범위 확인:** 0은 제공 파일에서 지원기간상 진행 중 기록이 없다는 의미입니다. 전체 선정·신청·포기 명단이 확보되면 상태를 다시 구성해야 합니다.
 4. **시기 구분 확정:** 이 파일럿은 연도별 예측을 보여줍니다. 논문 본 분석의 코로나19 국면 경계는 외부 정책·사회적 근거로 분석 전에 확정해야 합니다.
-5. **예측 결과 해석:** 랜덤포레스트가 단순 기준모형을 넘지 못한 결과도 보고하고, 변수 중요도를 정책효과로 읽지 않습니다.
+5. **조직 변화 시점 확인:** 2020년 형태를 전체 기간의 고정 상태로 해석하지 않습니다. 예를 들어 개봉중앙시장은 2020년 조직 없음으로 기록되었고, 별도 확인에 따르면 2023년 6월 법적단체로 등록된 뒤 2025년에 지원중으로 관찰됩니다. 설립·전환 시점을 다른 시장에서도 확인해야 합니다.
+6. **예측 결과 해석:** 랜덤포레스트가 단순 기준모형을 넘지 못한 결과도 보고하고, 변수 중요도를 정책효과로 읽지 않습니다.
 
 분석 코드는 [실행 안내](ANALYSIS_SCRIPTS_README.md)에, 변수 정의는 [코드북](panel_data_21-25_codebook.csv)에 정리되어 있습니다. 분석 설계의 근거는 [제3장 초안](../../../../../../05_writing/research_plan_20261031/제3장_연구설계_및_분석방법_초안_패널반영.md)에 있습니다.

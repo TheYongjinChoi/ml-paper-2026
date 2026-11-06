@@ -1,0 +1,15 @@
+OLS estimation, Dep. Var.: net_entry_rate
+Observations: 1,569
+Fixed-effects: code: 108,  period: 16
+Standard-errors: Clustered (code) 
+                     Estimate Std. Error   t value   Pr(>|t|)    
+post_first_support  -0.309580   0.322185 -0.960877 3.3878e-01    
+x_entropy_entry     -1.377140   2.391963 -0.575736 5.6600e-01    
+x_stores_entry     -22.918270   3.260597 -7.028857 2.0318e-10 ***
+x_operating_entry   -0.069819   0.024960 -2.797180 6.1141e-03 ** 
+x_foot_entry        -0.368912   0.409133 -0.901692 3.6925e-01    
+x_resident_entry     0.043389   0.259551  0.167171 8.6755e-01    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+RMSE: 2.07569     Adj. R2: 0.119656
+                Within R2: 0.086077
