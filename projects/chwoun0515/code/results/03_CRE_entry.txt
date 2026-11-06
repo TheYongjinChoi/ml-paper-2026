@@ -1,0 +1,53 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: 
+net_entry_rate ~ x_entropy_entry + x_stores_entry + x_operating_entry +  
+    x_foot_entry + x_resident_entry + x_support_entry + mean_x_entropy_entry +  
+    mean_x_stores_entry + mean_x_operating_entry + mean_x_foot_entry +  
+    mean_x_resident_entry + mean_x_support_entry + organization_presence_2020_0_1 +  
+    factor(period) + (1 | code)
+   Data: d
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+  13438.4   13620.2   -6688.2   13376.4      2573 
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-12.8316  -0.3660   0.0148   0.3496  13.8174 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ code     (Intercept) 0.2253   0.4747  
+ Residual             9.7700   3.1257  
+Number of obs: 2604, groups:  code, 165
+
+Fixed effects:
+                                Estimate Std. Error t value
+(Intercept)                     -1.28889    0.97168  -1.326
+x_entropy_entry                  0.93956    1.10132   0.853
+x_stores_entry                 -13.35367    1.33723  -9.986
+x_operating_entry               -0.02775    0.01322  -2.099
+x_foot_entry                     0.31169    0.42007   0.742
+x_resident_entry                -0.16358    0.26635  -0.614
+x_support_entry                  0.17395    0.27782   0.626
+mean_x_entropy_entry            -1.07824    1.10942  -0.972
+mean_x_stores_entry             13.20236    1.34078   9.847
+mean_x_operating_entry           0.02010    0.01354   1.485
+mean_x_foot_entry               -0.08038    0.43038  -0.187
+mean_x_resident_entry            0.12722    0.27447   0.463
+mean_x_support_entry            -0.03607    0.43668  -0.083
+organization_presence_2020_0_1   0.62401    0.25409   2.456
+factor(period)20222              0.67676    0.34685   1.951
+factor(period)20223             -0.19637    0.34818  -0.564
+factor(period)20224              0.78009    0.35037   2.226
+factor(period)20231             -0.22525    0.35395  -0.636
+factor(period)20232              0.55027    0.35480   1.551
+factor(period)20233              0.17558    0.35810   0.490
+factor(period)20234              0.95129    0.36068   2.637
+factor(period)20241              0.04347    0.36283   0.120
+factor(period)20242             -0.48197    0.36608  -1.317
+factor(period)20243             -0.39670    0.37031  -1.071
+factor(period)20244             -0.28292    0.37697  -0.750
+factor(period)20251             -0.93141    0.38533  -2.417
+factor(period)20252             -0.13667    0.39205  -0.349
+factor(period)20253             -0.07106    0.40114  -0.177
+factor(period)20254             -0.40747    0.40701  -1.001

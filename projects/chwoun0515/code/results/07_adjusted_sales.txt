@@ -1,0 +1,31 @@
+OLS estimation, Dep. Var.: sales_yoy_log
+Observations: 4,304
+Fixed-effects: code: 276,  period: 16
+Standard-errors: Clustered (code) 
+                    Estimate Std. Error   t value Pr(>|t|)    
+x_entropy_sales    -1.198493  25.738498 -0.046564 0.962894    
+x_stores_sales    -79.108807  44.020077 -1.797107 0.073416 .  
+x_operating_sales  -0.280545   0.390116 -0.719132 0.472670    
+x_foot_sales      -11.992405   6.700907 -1.789669 0.074607 .  
+x_resident_sales    6.756568   5.121830  1.319171 0.188209    
+x_support_sales    -1.340450  10.249418 -0.130783 0.896043    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+RMSE: 40.1     Adj. R2: 0.157364
+             Within R2: 0.010153
+OLS estimation, Dep. Var.: sales_yoy_log
+Observations: 4,304
+Fixed-effects: code: 276,  period: 16
+Standard-errors: Clustered (code) 
+                    Estimate Std. Error   t value Pr(>|t|)    
+x_entropy_sales    -1.190089  25.750886 -0.046215 0.963172    
+x_stores_sales    -79.158193  44.050076 -1.797005 0.073432 .  
+x_operating_sales  -0.280752   0.390233 -0.719447 0.472477    
+x_foot_sales      -11.970616   6.702219 -1.786068 0.075190 .  
+x_resident_sales    6.751052   5.120578  1.318416 0.188461    
+x_support_sales    -1.316231  10.254827 -0.128352 0.897964    
+x_support_history   0.767880   3.887250  0.197538 0.843552    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+RMSE: 40.1     Adj. R2: 0.157157
+             Within R2: 0.010156

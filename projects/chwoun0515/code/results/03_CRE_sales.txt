@@ -1,0 +1,53 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: 
+sales_yoy_log ~ x_entropy_sales + x_stores_sales + x_operating_sales +  
+    x_foot_sales + x_resident_sales + x_support_sales + mean_x_entropy_sales +  
+    mean_x_stores_sales + mean_x_operating_sales + mean_x_foot_sales +  
+    mean_x_resident_sales + mean_x_support_sales + organization_presence_2020_0_1 +  
+    factor(period) + (1 | code)
+   Data: d
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+  25488.6   25669.3  -12713.3   25426.6      2480 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-9.0486 -0.2525  0.0182  0.2870  7.1782 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ code     (Intercept)  286.8   16.94   
+ Residual             1331.7   36.49   
+Number of obs: 2511, groups:  code, 161
+
+Fixed effects:
+                               Estimate Std. Error t value
+(Intercept)                      9.0847    20.8610   0.435
+x_entropy_sales                 16.5817    13.8810   1.195
+x_stores_sales                  22.1049    21.5063   1.028
+x_operating_sales                0.3651     0.1911   1.911
+x_foot_sales                   -14.2400     4.9051  -2.903
+x_resident_sales                 4.3040     3.2598   1.320
+x_support_sales                  8.5006     3.2455   2.619
+mean_x_entropy_sales           -18.1456    14.1928  -1.279
+mean_x_stores_sales            -15.4256    21.6047  -0.714
+mean_x_operating_sales          -0.4999     0.2023  -2.471
+mean_x_foot_sales               16.2028     5.3053   3.054
+mean_x_resident_sales           -9.3030     3.5652  -2.609
+mean_x_support_sales            -8.3291     7.8140  -1.066
+organization_presence_2020_0_1  -5.8913     5.5178  -1.068
+factor(period)20222              2.4400     4.1110   0.594
+factor(period)20223             -0.1156     4.1340  -0.028
+factor(period)20224             -7.4663     4.1579  -1.796
+factor(period)20231             -3.9406     4.2093  -0.936
+factor(period)20232            -10.3018     4.2751  -2.410
+factor(period)20233            -13.6168     4.3410  -3.137
+factor(period)20234            -10.9173     4.4220  -2.469
+factor(period)20241            -13.2355     4.4842  -2.952
+factor(period)20242            -13.1273     4.5597  -2.879
+factor(period)20243            -15.7762     4.6219  -3.413
+factor(period)20244            -15.8810     4.6970  -3.381
+factor(period)20251            -12.2405     4.7461  -2.579
+factor(period)20252            -12.7538     4.8261  -2.643
+factor(period)20253             -8.5785     4.9543  -1.732
+factor(period)20254             -5.8452     5.1213  -1.141
