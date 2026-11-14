@@ -1,5 +1,6 @@
 ---
 title: "서울사랑상품권 결제정보를 활용한 결제 패턴 분석 및 예측 모델링"
+subtitle: "자치구별 소비 특성을 파악하고 자치구 단위의 정책적 시사점을 도출"
 author: "유하영"
 date: today
 format:
@@ -16,6 +17,8 @@ execute:
 # setting
 # dir.create("code", showWarnings = FALSE)
 # file.create("code/initial.R")
+
+rm(list = ls())
 
 getwd()
 setwd("C:/Users/jw_5202/Desktop/ml-paper-2026/projects/zxcv1977")
@@ -59,7 +62,7 @@ source("code/2_data.R")
 # file.create("code/3_data.R")
 
 ```{r}
-#| label: data-prep (2)
+#| label: cross checking
 
 source("code/3_data.R")
 ```
@@ -67,24 +70,28 @@ source("code/3_data.R")
 [Back to top](#top)
 
 
-# 4. Estimation
+# 4. 데이터 전처리(2차/서울만)
+# file.create("code/4_data.R")
 
 ```{r}
-#| label: estimation
+#| label: data-prep (3)
 
-
+source("code/4_data.R")
 ```
 
 [Back to top](#top)
 
 
-# 5. Vizualization
-
-## Figure 1. xxx
+# 5. Clustering (군집분석)
+# RQ1. 서울시 25개 자치구는 소비규모와 소비구조에 따라 어떤 유형으로 구분되는가?
+# RQ2. 자치구·연령·성별로 구분된 집단은 어떤 결제 특성에 따라 유형화되는가?
+# RQ3. 1단계 지역 군집과 2단계 인구집단 군집 사이에는 어떠한 연관성이 나타나는가?
+# file.create("code/5_data.R")
 
 ```{r}
-#| label: fig1
+#| label: Clustering
 
+source("code/5_data.R")
 ```
 
 ## Figure 2. xxx
