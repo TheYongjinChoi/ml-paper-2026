@@ -57,13 +57,6 @@ stopifnot(
 # 4. 분석용 파일 저장
 # ==================================================
 
-fwrite(
-  payment_seoul,
-  "2025_결제_서울25개자치구_분석용.csv",
-  bom = TRUE
-)
+# fwrite(payment_seoul, "2025_결제_서울25개자치구_분석용.csv", bom = TRUE)
 
-saveRDS(
-  payment_seoul,
-  "2025_결제_서울25개자치구_분석용.rds"
-)
+# saveRDS(payment_seoul, "2025_결제_서울25개자치구_분석용.rds")

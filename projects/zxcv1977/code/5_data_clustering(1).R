@@ -1,6 +1,4 @@
 
-setwd("C:/Users/jw_5202/Desktop/ml-paper-2026/projects/zxcv1977")
-
 # ==================================================
 # 1. 변수 확인
 # ==================================================
@@ -8,9 +6,7 @@ setwd("C:/Users/jw_5202/Desktop/ml-paper-2026/projects/zxcv1977")
 library(data.table)
 
 # 데이터 불러오기
-payment_seoul <- readRDS(
-  "2025_결제_서울25개자치구_분석용.rds"
-)
+# payment_seoul <- readRDS("2025_결제_서울25개자치구_분석용.rds")
 
 # 변수명과 자료형 확인
 data.table(
@@ -151,11 +147,7 @@ gu_industry[
 print(gu_industry)
 
 # 저장
-fwrite(
-  gu_industry,
-  "자치구별_업종별_결제현황.csv",
-  bom = TRUE
-)
+# fwrite(gu_industry, "자치구별_업종별_결제현황.csv", bom = TRUE)
 
 
 # ==================================================
@@ -560,21 +552,10 @@ print(high_cor, nrows = 100)
 # 11-5. 분석용 데이터 저장
 # ----------------------------------------------
 
-fwrite(
-  cluster_district_full,
-  "서울25개자치구_군집분석_전체후보변수.csv",
-  bom = TRUE
-)
+# fwrite(cluster_district_full, "서울25개자치구_군집분석_전체후보변수.csv", bom = TRUE)
 
-saveRDS(
-  cluster_district_full,
-  "서울25개자치구_군집분석_전체후보변수.rds"
-)
+# saveRDS(cluster_district_full, "서울25개자치구_군집분석_전체후보변수.rds")
 
-fwrite(
-  high_cor,
-  "서울25개자치구_군집변수_높은상관관계.csv",
-  bom = TRUE
-)
+# fwrite(high_cor, "서울25개자치구_군집변수_높은상관관계.csv", bom = TRUE)
 
 cat("군집분석 기초 데이터 구축 완료\n")

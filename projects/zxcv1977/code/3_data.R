@@ -20,27 +20,12 @@ setwd("C:/Users/jw_5202/Desktop/ml-paper-2026/projects/zxcv1977")
 library(data.table)
 
 # 결과 폴더 생성
-cross_dir <- file.path("output", "cross_analysis")
+# cross_dir <- file.path("output", "cross_analysis")
+# payment_cross_dir <- file.path(cross_dir, "payment")
+# purchase_cross_dir <- file.path(cross_dir, "purchase")
 
-payment_cross_dir <- file.path(
-  cross_dir, "payment"
-)
-
-purchase_cross_dir <- file.path(
-  cross_dir, "purchase"
-)
-
-dir.create(
-  payment_cross_dir,
-  recursive = TRUE,
-  showWarnings = FALSE
-)
-
-dir.create(
-  purchase_cross_dir,
-  recursive = TRUE,
-  showWarnings = FALSE
-)
+# dir.create(payment_cross_dir, recursive = TRUE, showWarnings = FALSE)
+# dir.create(purchase_cross_dir, recursive = TRUE, showWarnings = FALSE)
 
 # ==========================================
 # 1. 전처리 데이터 불러오기
@@ -107,14 +92,7 @@ payment_gender_age <- cross_summary(
   amount_var = "결제금액"
 )
 
-fwrite(
-  payment_gender_age,
-  file.path(
-    payment_cross_dir,
-    "01_gender_age.csv"
-  ),
-  bom = TRUE
-)
+# fwrite(payment_gender_age, file.path(payment_cross_dir, "01_gender_age.csv"), bom = TRUE)
 
 
 # 3-2. 연령대 × 상품권 종류
@@ -126,14 +104,7 @@ payment_age_product <- cross_summary(
   amount_var = "결제금액"
 )
 
-fwrite(
-  payment_age_product,
-  file.path(
-    payment_cross_dir,
-    "02_age_product.csv"
-  ),
-  bom = TRUE
-)
+# fwrite(payment_age_product, file.path(payment_cross_dir, "02_age_product.csv"), bom = TRUE)
 
 
 # 3-3. 자치구 × 상품권 종류
@@ -145,14 +116,7 @@ payment_region_product <- cross_summary(
   amount_var = "결제금액"
 )
 
-fwrite(
-  payment_region_product,
-  file.path(
-    payment_cross_dir,
-    "03_region_product.csv"
-  ),
-  bom = TRUE
-)
+# fwrite(payment_region_product, file.path(payment_cross_dir, "03_region_product.csv"), bom = TRUE)
 
 
 # 3-4. 자치구 × 성별
@@ -164,14 +128,7 @@ payment_region_gender <- cross_summary(
   amount_var = "결제금액"
 )
 
-fwrite(
-  payment_region_gender,
-  file.path(
-    payment_cross_dir,
-    "04_region_gender.csv"
-  ),
-  bom = TRUE
-)
+# fwrite(payment_region_gender, file.path(payment_cross_dir, "04_region_gender.csv"), bom = TRUE)
 
 # ==========================================
 # 4. 상품권 구매 데이터 교차분석
@@ -190,14 +147,7 @@ purchase_gender_product <- cross_summary(
   amount_var = purchase_amount_var
 )
 
-fwrite(
-  purchase_gender_product,
-  file.path(
-    purchase_cross_dir,
-    "01_gender_product.csv"
-  ),
-  bom = TRUE
-)
+# fwrite(purchase_gender_product, file.path(purchase_cross_dir, "01_gender_product.csv"), bom = TRUE)
 
 
 # 4-2. 월별 × 할인율
@@ -228,14 +178,7 @@ setorder(
 )
 
 # 결과 저장
-fwrite(
-  purchase_month_discount,
-  file.path(
-    purchase_cross_dir,
-    "02_month_discount.csv"
-  ),
-  bom = TRUE
-)
+# fwrite(purchase_month_discount, file.path(purchase_cross_dir, "02_month_discount.csv"), bom = TRUE)
 
 
 # 4-3. 성별 × 할인율
@@ -266,14 +209,7 @@ setorder(
 )
 
 # 결과 저장
-fwrite(
-  purchase_gender_discount,
-  file.path(
-    purchase_cross_dir,
-    "03_gender_discount.csv"
-  ),
-  bom = TRUE
-)
+# fwrite(purchase_gender_discount, file.path(purchase_cross_dir, "03_gender_discount.csv"), bom = TRUE)
 
 
 # 4-4. 상품권 종류 × 할인율
@@ -304,18 +240,11 @@ setorder(
 )
 
 # 결과 저장
-fwrite(
-  purchase_product_discount,
-  file.path(
-    purchase_cross_dir,
-    "04_product_discount.csv"
-  ),
-  bom = TRUE
-)
+# fwrite(purchase_product_discount, file.path(purchase_cross_dir, "04_product_discount.csv"), bom = TRUE)
 
 # ==========================================
 # 5. 분석 완료
 # ==========================================
 
-cat("결제 교차분석 결과:", payment_cross_dir, "\n")
-cat("구매 교차분석 결과:", purchase_cross_dir, "\n")
+# cat("결제 교차분석 결과:", payment_cross_dir, "\n")
+# cat("구매 교차분석 결과:", purchase_cross_dir, "\n")

@@ -23,9 +23,8 @@ rm(list = ls())
 getwd()
 setwd("C:/Users/jw_5202/Desktop/ml-paper-2026/projects/zxcv1977")
 
-# 1. Initial setting
-
-## Loading packages
+# 연구 준비
+# Loading packages
 
 ```{r}
 #| label: setup
@@ -57,7 +56,6 @@ source("code/2_data.R")
 
 [Back to top](#top)
 
-
 # 교차분석
 # file.create("code/3_data.R")
 
@@ -69,8 +67,7 @@ source("code/3_data.R")
 
 [Back to top](#top)
 
-
-# 4. 데이터 전처리(2차/서울만)
+# 데이터 전처리(2차/서울만)
 # file.create("code/4_data.R")
 
 ```{r}
@@ -81,24 +78,40 @@ source("code/4_data.R")
 
 [Back to top](#top)
 
-
-# 5. Clustering (군집분석)
+# Clustering (군집분석, 1)
 # RQ1. 서울시 25개 자치구는 소비규모와 소비구조에 따라 어떤 유형으로 구분되는가?
 # RQ2. 자치구·연령·성별로 구분된 집단은 어떤 결제 특성에 따라 유형화되는가?
 # RQ3. 1단계 지역 군집과 2단계 인구집단 군집 사이에는 어떠한 연관성이 나타나는가?
-# file.create("code/5_data.R")
+# file.create("5_data_clustering(1).R")
 
 ```{r}
 #| label: Clustering
 
-source("code/5_data.R")
+setwd("C:/Users/jw_5202/Desktop/ml-paper-2026/projects/zxcv1977/code")
+
+source("5_data_clustering(1).R")
 ```
 
-## Figure 2. xxx
+# Clustering (군집분석, 2)
+# Clustering Figure
+# file.create("5_data_clustering(2).R")
 
 ```{r}
-#| label: fig2
+#| label: Clustering
 
+setwd("C:/Users/jw_5202/Desktop/ml-paper-2026/projects/zxcv1977/code")
+
+source("5_data_clustering(2).R")
+```
+
+[Back to top](#top)
+
+# 내용
+
+```{r}
+#| label: 내용
+
+source("data.R")
 ```
 
 [Back to top](#top)

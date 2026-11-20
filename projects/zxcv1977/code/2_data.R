@@ -448,39 +448,19 @@ date_summary <- data.table(
 # dir.create("output/purchase", recursive = TRUE, showWarnings = FALSE)
 
 # 데이터 크기
-fwrite(
-  preprocessing_size,
-  "output/preprocessing_size.csv",
-  bom = TRUE
-)
+# fwrite(preprocessing_size, "output/preprocessing_size.csv", bom = TRUE)
 
 # 결제 데이터 품질
-fwrite(
-  payment_quality,
-  "output/payment/preprocessing_quality.csv",
-  bom = TRUE
-)
+# fwrite(payment_quality, "output/payment/preprocessing_quality.csv", bom = TRUE)
 
 # 구매 데이터 품질
-fwrite(
-  purchase_quality,
-  "output/purchase/preprocessing_quality.csv",
-  bom = TRUE
-)
+# fwrite(purchase_quality, "output/purchase/preprocessing_quality.csv", bom = TRUE)
 
 # 자치구별 추출 결과
-fwrite(
-  district_summary,
-  "output/payment/district_extraction_summary.csv",
-  bom = TRUE
-)
+# fwrite(district_summary, "output/payment/district_extraction_summary.csv", bom = TRUE)
 
 # 날짜 오류 현황
-fwrite(
-  date_summary,
-  "output/date_error_summary.csv",
-  bom = TRUE
-)
+# fwrite(date_summary, "output/date_error_summary.csv", bom = TRUE)
 
 # ==========================================
 # 10. 전처리 데이터 저장
@@ -489,20 +469,11 @@ fwrite(
 # RDS 파일 저장 여부
 SAVE_RDS <- TRUE
 
-if (SAVE_RDS) {
+# if (SAVE_RDS) {
   
-  saveRDS(
-    payment_clean,
-    "output/payment/payment_clean.rds",
-    compress = FALSE
-  )
+# saveRDS(payment_clean, "output/payment/payment_clean.rds", compress = FALSE)
   
-  saveRDS(
-    purchase_clean,
-    "output/purchase/purchase_clean.rds",
-    compress = FALSE
-  )
-}
+# saveRDS(purchase_clean, "output/purchase/purchase_clean.rds", compress = FALSE)}
 
 # ==========================================
 # 11. 최종 결과 확인
