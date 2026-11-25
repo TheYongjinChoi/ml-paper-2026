@@ -30,6 +30,7 @@ library(ipred)
 library(ranger)
 library(tidymodels)
 library(readr)
+library(doParallel)
 
 file_path <- "c:/data_ml2.csv"
 
@@ -140,9 +141,6 @@ wf_lm <- workflow() |> add_recipe(rec_lm) |> add_model(linear_reg())
 fit_lm <- last_fit(wf_lm, split, metrics = metric_set(rmse, rsq, mae))
 collect_metrics(fit_lm)    # 랜덤포레스트(0.640, 0.385)와 비교
 
--------------------------
-
-# 레시피: 연속형 privacy는 누수라 제거
 rec_c <- recipe(privacy_high ~ ., data = train) |>
   step_rm(privacy)
 
