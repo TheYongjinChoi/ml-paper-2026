@@ -1,0 +1,259 @@
+---
+title: "누가 온라인 개인정보 침해를 더 두려워하는가? 랜덤포레스트를 활용한 프라이버시 염려 예측 및 고위험군 분류 분석"
+author: "박성준"
+date: today
+abstract: |
+  **Background** 대한민국은 디지털 혁신을 확산하기 위해 디지털 뉴딜(Digital New Deal) 정책을 추진했고, 디지털 대전환(Digital Transformation)을 맞이하고 있다. 이에 국회에서 2024년 12월 26일날 AI 기본법을 의결하였고, 국가 차원에서 인공지능 거버넌스 체계를 정립하고 인공지능 산업 육성 및 인공지능으로부터 발생할 수 있는 위험을 사전에 예방하고자 한다. 시민들의 개인 맞춤형 서비스를 제공받기 위해서 인공지능 활용이 증가했고, 개인정보 제공은 무분별하고 무의식적으로 제공되고 있다. 특히 최근 쿠팡과 티빙 등 기업에서 개인정보 유출 사고가 빈번히 발생되면서, 시민들의 개인정보 도용에 대한 우려가 점차 증가되고, 정부와 국회에서 논의가 본격적으로 시작되고 있다. 이에, 본 연구는 랜덤포레스트를 활용해서 온라인 개인정보 침해 염려에 대해 분류형과 연속형으로 각각 분석하고자 한다. 연속형으로 온라인 개인정보 침해 염려에 대한 예측요인을 탐색하고, 분류형으로 고위험군(개인정보 침해 염려 수준이 높은 집단)으로 분류되는 요인을 탐색하고자 한다. 
+
+format:
+  html:
+    embed-resources: true
+    toc: true
+    toc-depth: 3
+    code-fold: true
+    theme: paper
+execute:
+  echo: true
+  warning: false
+---
+
+# Result: Random Forest 
+
+```{r}
+#| label: setup
+
+library(dplyr)
+library(tidyr)
+library(tibble)
+library(ggplot2)
+library(rpart)
+library(ipred)
+library(ranger)
+library(tidymodels)
+library(readr)
+
+file_path <- "c:/data_ml2.csv"
+
+ohie <- read_csv(file_path)
+
+if (inherits(ohie, "data.table")) ohie <- as.data.frame(ohie)
+
+summary(ohie$privacy)
+ggplot(ohie, aes(x = privacy)) + geom_histogram(binwidth = 0.2)
+
+cut <- quantile(ohie$privacy, 0.75)
+
+required_vars <- c(
+  "area", "gender", "age", "school", "income", "snsuse", "snspublic", "snsshare", "snsmap", "cloud", "meta", "aiknow",
+  "aiuse", "com_tv", "com_mall", "com_aboard", "com_person", "com_bank", "com_trans", "com_buy", "oneline", "capa_base",
+  "capa_master", "capa_security", "liter", "werable", "self", "pol_part", "politic", "emotion")
+
+stopifnot(all(required_vars %in% names(ohie)))
+
+ohie <- ohie |>
+  mutate(privacy_high = factor(if_else(privacy >= cut, "high", "low"), levels = c("high", "low")),
+  area = factor(area),
+  gender = factor(gender)) |>
+  select(privacy, privacy_high, all_of(required_vars))
+
+prop.table(table(ohie$privacy_high))
+
+set.seed(42)
+split <- initial_split(ohie, prop=0.7, strata = privacy_high)
+train <- training(split)
+folds <- vfold_cv(train, v = 5, strata = privacy_high)
+
+rec_r <- recipe(privacy ~ ., data = train) |>
+  step_rm(privacy_high)
+
+rf_r <- rand_forest(trees = 500, mtry = tune(), min_n = tune()) |>
+  set_engine("ranger", importance = "permutation") |>
+  set_mode("regression")
+
+wf_r <- workflow() |> add_recipe(rec_r) |> add_model(rf_r)
+
+params_r <- extract_parameter_set_dials(wf_r) |>
+  update(mtry = mtry(c(3L, 15L)), min_n = min_n(c(5L, 40L)))
+
+set.seed(42)
+tuned_r <- tune_grid(
+  wf_r, resamples = folds, param_info = params_r, grid = 20,
+  metrics = metric_set(rmse, rsq, mae)
+)
+
+show_best(tuned_r, metric = "rmse")
+
+sd(ohie$privacy)
+1 - (0.650 / sd(ohie$privacy))^2
+autoplot(tuned_r)
+
+best_r <- select_best(tuned_r, metric = "rmse")
+fit_r <- last_fit(finalize_workflow(wf_r, best_r), split, metrics = metric_set(rmse, rsq, mae))
+collect_metrics(fit_r)
+
+collect_predictions(fit_r) |> 
+  ggplot(aes(x = privacy, y = .pred)) +
+  geom_point(alpha = 0.3) +
+  geom_abline(linetype = 'dashed') +
+  labs(x = "실제 privacy", y = "예측 privacy")
+
+imp_r <- extract_fit_engine(fit_r)$variable.importance
+
+imp_r_df <- tibble(variable = names(imp_r), importance = imp_r) |>
+  arrange(desc(importance))
+
+imp_r_df |> print(n = 30)   # 전체 수치 확인
+
+imp_r_df |>
+  slice_head(n = 15) |>
+  ggplot(aes(x = importance, y = reorder(variable, importance))) +
+  geom_col() +
+  labs(x = "순열 중요도 (permutation importance)", y = NULL)
+
+collect_metrics(fit_r)
+
+wf_fit <- extract_workflow(fit_r)
+
+pdp_one <- function(var) {
+  x <- sort(unique(train[[var]]))
+  if (length(x) > 20) x <- seq(min(x), max(x), length.out = 20)
+  map_dfr(x, \(v) {
+    d <- train
+    d[[var]] <- v
+    tibble(variable = var, value = v, pred = mean(predict(wf_fit, d)$.pred))
+  })
+}
+
+pdp_df <- map_dfr(c("liter", "emotion", "capa_master", "oneline"), pdp_one)
+
+ggplot(pdp_df, aes(value, pred)) +
+  geom_line() +
+  facet_wrap(~ variable, scales = "free_x") +
+  labs(x = "변수 값", y = "평균 예측 privacy")
+
+rec_lm <- recipe(privacy ~ ., data = train) |>
+  step_rm(privacy_high) |>
+  step_dummy(all_nominal_predictors()) |>
+  step_zv(all_predictors())
+
+wf_lm <- workflow() |> add_recipe(rec_lm) |> add_model(linear_reg())
+
+fit_lm <- last_fit(wf_lm, split, metrics = metric_set(rmse, rsq, mae))
+collect_metrics(fit_lm)    # 랜덤포레스트(0.640, 0.385)와 비교
+
+-------------------------
+
+# 레시피: 연속형 privacy는 누수라 제거
+rec_c <- recipe(privacy_high ~ ., data = train) |>
+  step_rm(privacy)
+
+# 튜닝용 모델 (중요도 계산 없음)
+rf_c <- rand_forest(trees = 300, mtry = tune(), min_n = tune()) |>
+  set_engine("ranger", num.threads = 1) |>
+  set_mode("classification")
+
+wf_c <- workflow() |> add_recipe(rec_c) |> add_model(rf_c)
+
+params_c <- dials::parameters(
+  dials::mtry(range = c(3L, 15L)),
+  dials::min_n(range = c(5L, 40L))
+)
+
+# 병렬 처리
+cl <- makePSOCKcluster(parallel::detectCores() - 1)
+registerDoParallel(cl)
+
+cls_tune_metrics <- metric_set(
+  yardstick::roc_auc, yardstick::pr_auc,
+  yardstick::sens, yardstick::spec, yardstick::f_meas
+)
+
+set.seed(42)
+tuned_c <- tune_grid(
+  wf_c, resamples = folds, param_info = params_c, grid = 20,
+  metrics = cls_tune_metrics,
+  control = control_grid(verbose = TRUE)
+)
+
+stopCluster(cl)
+
+show_best(tuned_c, metric = "roc_auc")
+autoplot(tuned_c)
+
+best_c <- select_best(tuned_c, metric = "roc_auc")
+best_c
+
+final_c <- finalize_workflow(wf_c, best_c) |>
+  update_model(
+    rand_forest(trees = 500, mtry = best_c$mtry, min_n = best_c$min_n) |>
+      set_engine("ranger", importance = "permutation") |>
+      set_mode("classification")
+  )
+
+cls_metrics <- metric_set(
+  yardstick::roc_auc, yardstick::pr_auc, yardstick::accuracy,
+  yardstick::sens, yardstick::spec, yardstick::f_meas
+)
+
+fit_c <- last_fit(final_c, split, metrics = cls_metrics)
+collect_metrics(fit_c)
+
+pred_c <- collect_predictions(fit_c)
+conf_mat(pred_c, truth = privacy_high, estimate = .pred_class)
+roc_curve(pred_c, truth = privacy_high, .pred_high) |> autoplot()
+
+rec_glm <- recipe(privacy_high ~ ., data = train) |>
+  step_rm(privacy) |>
+  step_dummy(all_nominal_predictors()) |>
+  step_zv(all_predictors())
+
+wf_glm <- workflow() |> add_recipe(rec_glm) |> add_model(logistic_reg())
+
+fit_glm <- last_fit(wf_glm, split, metrics = cls_metrics)
+collect_metrics(fit_glm)
+
+imp_c <- extract_fit_engine(fit_c)$variable.importance
+
+imp_c_df <- tibble(variable = names(imp_c), importance = imp_c) |>
+  arrange(desc(importance))
+
+imp_c_df |> print(n = 30)
+
+imp_c_df |>
+  slice_head(n = 15) |>
+  ggplot(aes(x = importance, y = reorder(variable, importance))) +
+  geom_col() +
+  labs(x = "순열 중요도 (분류)", y = NULL)
+
+# 회귀와 분류의 순위 비교
+imp_r_df |>
+  mutate(rank_reg = row_number()) |>
+  select(variable, rank_reg) |>
+  inner_join(imp_c_df |> mutate(rank_cls = row_number()) |> select(variable, rank_cls),
+             by = "variable") |>
+  arrange(rank_reg) |>
+  print(n = 15)
+
+wf_fit_c <- extract_workflow(fit_c)
+
+pdp_one_c <- function(var) {
+  x <- sort(unique(train[[var]]))
+  if (length(x) > 20) x <- seq(min(x), max(x), length.out = 20)
+  map_dfr(x, \(v) {
+    d <- train
+    d[[var]] <- v
+    tibble(variable = var, value = v,
+           pred = mean(predict(wf_fit_c, d, type = "prob")$.pred_high))
+  })
+}
+
+top4 <- head(imp_c_df$variable, 4)
+pdp_c <- map_dfr(top4, pdp_one_c)
+
+ggplot(pdp_c, aes(value, pred)) +
+  geom_line() +
+  facet_wrap(~ variable, scales = "free_x") +
+  labs(x = "변수 값", y = "평균 고위험 확률")
+```
+
+
