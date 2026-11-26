@@ -1,0 +1,151 @@
+﻿model,repeat_id,variable,delta_RMSE
+Linear Regression,1,district,346.741724077045
+Linear Regression,1,industry,21200.9335495758
+Linear Regression,1,sex,7.59368618788722
+Linear Regression,1,age,32.4026489551616
+Linear Regression,1,month,130.604569736948
+Linear Regression,1,weekday,20.993906381409
+Random Forest,1,district,2185.9716044916
+Random Forest,1,industry,22944.4354430282
+Random Forest,1,sex,28.6895071262625
+Random Forest,1,age,1483.39487295273
+Random Forest,1,month,974.484190100244
+Random Forest,1,weekday,505.561952815551
+Extra Trees,1,district,1438.18920882166
+Extra Trees,1,industry,21725.6519660331
+Extra Trees,1,sex,6.43619495459279
+Extra Trees,1,age,1184.13727847001
+Extra Trees,1,month,566.402464936524
+Extra Trees,1,weekday,154.919993401258
+XGBoost,1,district,1345.34681716122
+XGBoost,1,industry,22215.5319073036
+XGBoost,1,sex,-0.00873784341092687
+XGBoost,1,age,1770.21296166531
+XGBoost,1,month,562.735517502173
+XGBoost,1,weekday,9.38830113911536
+LightGBM,1,district,948.522201087107
+LightGBM,1,industry,21879.8833290689
+LightGBM,1,sex,28.276802014836
+LightGBM,1,age,1225.55654232363
+LightGBM,1,month,444.252497264068
+LightGBM,1,weekday,37.5364678362603
+Linear Regression,2,district,360.45419740145
+Linear Regression,2,industry,20293.2943198332
+Linear Regression,2,sex,0.830062754263054
+Linear Regression,2,age,27.2396213158136
+Linear Regression,2,month,56.9152472220667
+Linear Regression,2,weekday,40.8697835644343
+Random Forest,2,district,1960.44158807768
+Random Forest,2,industry,21186.8608999331
+Random Forest,2,sex,167.064955260816
+Random Forest,2,age,1371.89722441867
+Random Forest,2,month,357.466760265816
+Random Forest,2,weekday,418.637766494278
+Extra Trees,2,district,1538.33195697038
+Extra Trees,2,industry,20585.9415872305
+Extra Trees,2,sex,182.19068195876
+Extra Trees,2,age,1177.61214957244
+Extra Trees,2,month,285.161992574896
+Extra Trees,2,weekday,167.563662239336
+XGBoost,2,district,1127.61948625359
+XGBoost,2,industry,20754.8196715848
+XGBoost,2,sex,188.683313586444
+XGBoost,2,age,1011.17448702166
+XGBoost,2,month,210.291344784389
+XGBoost,2,weekday,123.604282422108
+LightGBM,2,district,1171.2372660769
+LightGBM,2,industry,20801.3587535567
+LightGBM,2,sex,99.5451514367524
+LightGBM,2,age,1128.934144226
+LightGBM,2,month,139.747562312776
+LightGBM,2,weekday,81.2683522109874
+Linear Regression,3,district,433.324721335332
+Linear Regression,3,industry,19372.4031656324
+Linear Regression,3,sex,-1.46457010426821
+Linear Regression,3,age,58.2357577413568
+Linear Regression,3,month,202.30205639144
+Linear Regression,3,weekday,48.8157648564957
+Random Forest,3,district,1780.21058994874
+Random Forest,3,industry,20171.4953345352
+Random Forest,3,sex,321.828246100995
+Random Forest,3,age,573.048928623663
+Random Forest,3,month,536.550907452911
+Random Forest,3,weekday,47.5587208127108
+Extra Trees,3,district,1507.69184981615
+Extra Trees,3,industry,19305.3195292462
+Extra Trees,3,sex,347.240544809538
+Extra Trees,3,age,526.165209894316
+Extra Trees,3,month,545.364309021672
+Extra Trees,3,weekday,-3.24521334851306
+XGBoost,3,district,1565.43419050594
+XGBoost,3,industry,20730.8601729598
+XGBoost,3,sex,207.780500461391
+XGBoost,3,age,824.585904046682
+XGBoost,3,month,726.585294581411
+XGBoost,3,weekday,148.799980905205
+LightGBM,3,district,1085.58477947298
+LightGBM,3,industry,20057.9431974603
+LightGBM,3,sex,140.436724623054
+LightGBM,3,age,522.201779145355
+LightGBM,3,month,471.322002088527
+LightGBM,3,weekday,98.3063468579712
+Linear Regression,4,district,321.524876304487
+Linear Regression,4,industry,18901.7986542836
+Linear Regression,4,sex,2.42215726282302
+Linear Regression,4,age,27.5832769692861
+Linear Regression,4,month,139.088237066426
+Linear Regression,4,weekday,46.639730887684
+Random Forest,4,district,1552.26884906877
+Random Forest,4,industry,19724.990869984
+Random Forest,4,sex,245.553009765223
+Random Forest,4,age,829.543339359938
+Random Forest,4,month,924.598256126163
+Random Forest,4,weekday,-105.687709340215
+Extra Trees,4,district,1183.57049352782
+Extra Trees,4,industry,19240.7309860746
+Extra Trees,4,sex,310.335115477523
+Extra Trees,4,age,913.529510403569
+Extra Trees,4,month,702.592364127304
+Extra Trees,4,weekday,-5.90335345074709
+XGBoost,4,district,1225.73881774004
+XGBoost,4,industry,20303.7586339389
+XGBoost,4,sex,233.818413100234
+XGBoost,4,age,1026.86992713918
+XGBoost,4,month,405.980510425805
+XGBoost,4,weekday,-119.762391403645
+LightGBM,4,district,792.461144870234
+LightGBM,4,industry,19457.4602043583
+LightGBM,4,sex,220.540648453025
+LightGBM,4,age,458.556778815153
+LightGBM,4,month,294.981174943241
+LightGBM,4,weekday,27.628714528124
+Linear Regression,5,district,477.4183338156
+Linear Regression,5,industry,18363.9022997466
+Linear Regression,5,sex,2.07140214844549
+Linear Regression,5,age,26.0944799269782
+Linear Regression,5,month,202.302019250994
+Linear Regression,5,weekday,60.8530628872395
+Random Forest,5,district,1963.33976464283
+Random Forest,5,industry,19588.8089083984
+Random Forest,5,sex,437.653093219939
+Random Forest,5,age,1553.68882423219
+Random Forest,5,month,680.475656807983
+Random Forest,5,weekday,202.642620022518
+Extra Trees,5,district,1495.75883617035
+Extra Trees,5,industry,18814.2509686777
+Extra Trees,5,sex,412.330953605844
+Extra Trees,5,age,1247.76348001471
+Extra Trees,5,month,719.685322046047
+Extra Trees,5,weekday,186.311611882302
+XGBoost,5,district,1473.31167517677
+XGBoost,5,industry,19767.3160165548
+XGBoost,5,sex,245.346984122531
+XGBoost,5,age,1250.9500721826
+XGBoost,5,month,582.740177246888
+XGBoost,5,weekday,7.04591151160275
+LightGBM,5,district,1350.50116687581
+LightGBM,5,industry,19419.619826143
+LightGBM,5,sex,140.783397620093
+LightGBM,5,age,911.839197487825
+LightGBM,5,month,475.195452419073
+LightGBM,5,weekday,4.73616814678098

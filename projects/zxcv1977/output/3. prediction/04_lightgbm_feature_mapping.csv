@@ -1,0 +1,69 @@
+﻿LightGBM변수명,원래변수명
+feature_1,district양천구
+feature_2,district서초구
+feature_3,district마포구
+feature_4,district중구
+feature_5,district구로구
+feature_6,district성북구
+feature_7,district송파구
+feature_8,district서대문구
+feature_9,district은평구
+feature_10,district강서구
+feature_11,district영등포구
+feature_12,district종로구
+feature_13,district중랑구
+feature_14,district관악구
+feature_15,district강남구
+feature_16,district동작구
+feature_17,district도봉구
+feature_18,district성동구
+feature_19,district강북구
+feature_20,district동대문구
+feature_21,district노원구
+feature_22,district금천구
+feature_23,district광진구
+feature_24,district강동구
+feature_25,district용산구
+feature_26,district정보없음
+feature_27,industry병원
+feature_28,industry한식 음식점업
+feature_29,industry음ㆍ식료품 위주 종합 소매업
+feature_30,industry이용 및 미용업
+feature_31,industry기타업종
+feature_32,"industry의약품, 의료용 기구, 화장품 및 방향제 소매업"
+feature_33,industry의원
+feature_34,industry비알코올 음료점업
+feature_35,industry일반 교습학원
+feature_36,industry외국식 음식점업
+feature_37,industry기타 간이 음식점업
+feature_38,industry식료품 소매업
+feature_39,industry스포츠 및 레크리에이션 교육기관
+feature_40,industry예술학원
+feature_41,industry기술 및 직업 훈련학원
+feature_42,industry그 외 기타 상품 전문 소매업
+feature_43,industry기타 스포츠시설 운영업
+feature_44,industry대형 종합 소매업
+feature_45,"industry떡, 빵 및 과자류 제조업"
+feature_46,industry세탁업
+feature_47,industry외국어학원 및 기타 교습학원
+feature_48,industry서적 및 문구용품 소매업
+feature_49,industry그 외 기타 종합 소매업
+feature_50,industry의복 소매업
+feature_51,"industry사무용 기기, 안경, 사진장비 및 정밀기기 소매업"
+feature_52,industry그 외 기타 분류 안된 개인 서비스업
+feature_53,industry기타 보건업
+feature_54,industry기타 스포츠 서비스업
+feature_55,industry기타 식료품 제조업
+feature_56,"industry컴퓨터 및 주변장치, 소프트웨어 도매업"
+feature_57,industry정보없음
+feature_58,sex남성
+feature_59,sex정보없음
+feature_60,age60대
+feature_61,age50대
+feature_62,age40대
+feature_63,age20대
+feature_64,age70대 이상
+feature_65,age10대 이하
+feature_66,age정보없음
+feature_67,month
+feature_68,weekday
